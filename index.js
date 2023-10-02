@@ -30,7 +30,7 @@ console.log(seconds);
 function addSeconds() {
     seconds = seconds + addedSeconds;
     console.log(seconds);
-    if(seconds > 59) {
+    if (seconds > 59) {
         addedMinutes += 1;
         let extraSeconds = seconds - 59;
         seconds = extraSeconds;
@@ -40,18 +40,18 @@ function addSeconds() {
 
 function addMinutes() {
     console.log(minutes);
-    for(let i = 0; i < addedMinutes; i++) {
+    for (let i = 0; i < addedMinutes; i++) {
         minutes = minutes + 1;
-        if(minutes > 59) {
+        if (minutes > 59) {
             minutes = 0;
             hour = hour + 1;
-            if(hour > 23) {
+            if (hour > 23) {
                 hour = 0;
                 date = date + 1
                 let daysInMonth = daysInEachMonth[new Date().getMonth()];
-                if(date > daysInMonth) {
+                if (date > daysInMonth) {
                     date = 1;
-                    if(month === "Dec") {
+                    if (month === "Dec") {
                         month = "Jan";
                     } else {
                         month = months[new Date().getMonth() + 1];
@@ -71,26 +71,26 @@ function setEggTimer() {
 }
 
 // Update the count down every 1 second
-var x = setInterval(function() {
+var x = setInterval(function () {
 
-  // Get today's date and time
-  var now = new Date().getTime();
+    // Get today's date and time
+    var now = new Date().getTime();
 
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
 
-  // Time calculations for days, hours, minutes and seconds
-  //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  //var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Time calculations for days, hours, minutes and seconds
+    //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    //var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  // Display the result in the element with id="demo"
-  document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+    // Display the result in the element with id="demo"
+    document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
-  // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer").innerHTML = "EXPIRED";
-  }
+    // If the count down is finished, write some text
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "EXPIRED";
+    }
 }, 1000);
