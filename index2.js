@@ -16,7 +16,8 @@ function timer(minutes, seconds, cb) {
 
         if (remaningMinutes === 0 && remaningSeconds === 0) {
             clearInterval(intervalId);
-            alert("Time´s up!");
+            console.log("Times up");
+            // alert("Time´s up!");
         } else {
             if (remaningSeconds === 0) {
                 remaningMinutes--;
