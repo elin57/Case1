@@ -43,6 +43,11 @@ document.getElementById("startButton").addEventListener("click", function () {
 });
 
 document.getElementById("infoButton").addEventListener("click", function () {
+    document.getElementById("timer").style.display = "none";
+    document.getElementById("startButton").style.display = "none";
+    document.getElementById("infoButton").style.display = "none";
+
+
     document.getElementById("content").innerHTML = `
     <h1>How to boil egg</h1>
 
@@ -52,7 +57,7 @@ document.getElementById("infoButton").addEventListener("click", function () {
     <li>Boil water in a medium sized pot</li>
     <li>Put egg in water using a spoon as to not crack the egg/eggs</li>
     <li>Start timer</li>
-    <li>couple minutes later...</li>
+    <li>A couple minutes later...</li>
     <li>Boom done!</li>
     </ol>
 
@@ -60,6 +65,12 @@ document.getElementById("infoButton").addEventListener("click", function () {
     `;
 
     document.getElementById("goBackButton").addEventListener("click", function () {
+
+        //restore
+        document.getElementById("timer").style.display = "block";
+        document.getElementById("startButton").style.display = "block";
+        document.getElementById("infoButton").style.display = "block";
+
         document.getElementById("content").innerHTML = "";
     });
 })
