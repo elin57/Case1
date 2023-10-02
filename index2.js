@@ -41,3 +41,25 @@ document.getElementById("startButton").addEventListener("click", function () {
     timer(1, 30, callback); //Adjust the initial time here
 
 });
+
+document.getElementById("infoButton").addEventListener("click", function () {
+    document.getElementById("content").innerHTML = `
+    <h1>How to boil egg</h1>
+
+    <ol>
+    <li>Check the size of your egg by looking at the bottom of the eggcarton</li>
+    <li>Select how you would like your egg</li>
+    <li>Boil water in a medium sized pot</li>
+    <li>Put egg in water using a spoon as to not crack the egg/eggs</li>
+    <li>Start timer</li>
+    <li>couple minutes later...</li>
+    <li>Boom done!</li>
+    </ol>
+
+    <button id="goBackButton">Go Back</button>
+    `;
+
+    document.getElementById("goBackButton").addEventListener("click", function () {
+        document.getElementById("content").innerHTML = "";
+    });
+})
