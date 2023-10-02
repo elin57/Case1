@@ -35,18 +35,18 @@ function addSeconds(seconds) {
 
 function addMinutes(minutes, hour) {
     console.log(minutes);
-    for(let i = 0; i < addedMinutes; i++) {
+    for (let i = 0; i < addedMinutes; i++) {
         minutes = minutes + 1;
-        if(minutes > 59) {
+        if (minutes > 59) {
             minutes = 0;
             hour = hour + 1;
-            if(hour > 23) {
+            if (hour > 23) {
                 hour = 0;
                 date = date + 1
                 let daysInMonth = daysInEachMonth[new Date().getMonth()];
-                if(date > daysInMonth) {
+                if (date > daysInMonth) {
                     date = 1;
-                    if(month === "Dec") {
+                    if (month === "Dec") {
                         month = "Jan";
                     } else {
                         month = months[new Date().getMonth() + 1];
