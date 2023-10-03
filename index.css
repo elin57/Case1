@@ -50,6 +50,12 @@ header {
     text-align: center;
 }
 
+#eggTimer {
+    text-align: center;
+    background-color: #E1F2F4;
+    border-radius: 12px;
+}
+
 #minutes,
 #seconds {
     font-size: 4vh;

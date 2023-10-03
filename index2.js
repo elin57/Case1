@@ -38,8 +38,12 @@ var callback = function () {
 };
 
 document.getElementById("startButton").addEventListener("click", function () {
-    timer(1, 30, callback); //Adjust the initial time here
+    document.getElementById("startButton").style.display = "none";
+    const timerid = document.getElementById("timer");
 
+    timerid.setAttribute("id", "eggTimer");
+
+    timer(1, 30, callback); //Adjust time here
 });
 
 document.getElementById("infoButton").addEventListener("click", function () {
