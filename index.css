@@ -50,8 +50,9 @@ header {
     text-align: center;
 }
 
-#eggTimer {
-    text-align: center;
+.eggTimer {
+    width: 176px;
+    height: 75px;
     background-color: #E1F2F4;
     border-radius: 12px;
 }

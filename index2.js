@@ -39,9 +39,9 @@ var callback = function () {
 
 document.getElementById("startButton").addEventListener("click", function () {
     document.getElementById("startButton").style.display = "none";
-    const timerid = document.getElementById("timer");
 
-    timerid.setAttribute("id", "eggTimer");
+    const timerName = document.getElementById("timer");
+    timerName.setAttribute("class", "eggTimer");
 
     timer(1, 30, callback); //Adjust time here
 });
