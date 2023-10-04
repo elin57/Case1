@@ -170,7 +170,28 @@ let eggSize = document.querySelectorAll("div.size");
 
 for (let i = 0; i < eggSize.length; i++) {
     eggSize[i].addEventListener("click", decideEggSize);
+    eggSize[i].addEventListener("click", changeColor);
 
+}
+
+function changeColor(event) {
+
+    console.log(event.originalTarget);
+    if(event.originalTarget.id === "sizeS") {
+        if(document.querySelector("div#sizeM").style.backgroundColor = "9ED0D6") {
+            document.querySelector("div#sizeM").style.backgroundColor = "#E1F2F4";
+        } else if(document.querySelector("div#sizeL").style.backgroundColor = "9ED0D6") {
+            document.querySelector("div#sizeL").style.backgroundColor = "#E1F2F4";
+        }
+        document.querySelector("div#sizeS").style.backgroundColor = "#9ED0D6";
+    } else if(event.originalTarget.id === "sizeM") {
+        if(document.querySelector("div#sizeS").style.backgroundColor = "9ED0D6") {
+            document.querySelector("div#sizeS").style.backgroundColor = "#E1F2F4";
+        } else if(document.querySelector("div#sizeL").style.backgroundColor = "9ED0D6") {
+            document.querySelector("div#sizeL").style.backgroundColor = "#E1F2F4";
+        }
+        document.querySelector("div#sizeM").style.backgroundColor = "#9ED0D6";
+    }
 }
 
 console.log(chosenOptions);
