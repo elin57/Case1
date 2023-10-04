@@ -1,3 +1,4 @@
+"use strict";
 
 function updateTimerDisplay(minutes, seconds) {
     document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
@@ -42,10 +43,23 @@ document.getElementById("startButton").addEventListener("click", function () {
     let minutes = parseInt(document.querySelector("span#minutes").textContent);
     let seconds = parseInt(document.querySelector("span#seconds").textContent);
     timer(minutes, seconds, callback); //Adjust the initial time here
+    document.getElementById("startButton").style.display = "none";
+    document.getElementById("timer").style.display = "block";
+    document.getElementById("readyIn").style.display = "block";
+    document.getElementById("infoButton").style.display = "none";
 
+    // const timerName = document.getElementById("timer");
+    // timerName.setAttribute("class", "eggTimer");
+
+    timer(1, 30, callback); //Adjust time here
 });
 
 document.getElementById("infoButton").addEventListener("click", function () {
+    document.getElementById("timer").style.display = "none";
+    document.getElementById("startButton").style.display = "none";
+    document.getElementById("infoButton").style.display = "none";
+
+
     document.getElementById("content").innerHTML = `
     <h1>How to boil egg</h1>
 
@@ -55,7 +69,7 @@ document.getElementById("infoButton").addEventListener("click", function () {
     <li>Boil water in a medium sized pot</li>
     <li>Put egg in water using a spoon as to not crack the egg/eggs</li>
     <li>Start timer</li>
-    <li>couple minutes later...</li>
+    <li>A couple minutes later...</li>
     <li>Boom done!</li>
     </ol>
 
@@ -63,6 +77,12 @@ document.getElementById("infoButton").addEventListener("click", function () {
     `;
 
     document.getElementById("goBackButton").addEventListener("click", function () {
+
+        //restore
+        document.getElementById("timer").style.display = "block";
+        document.getElementById("startButton").style.display = "block";
+        document.getElementById("infoButton").style.display = "block";
+
         document.getElementById("content").innerHTML = "";
     });
 })
