@@ -19,6 +19,7 @@ function timer(minutes, seconds, cb) {
             clearInterval(intervalId);
             console.log("Times up");
             document.getElementById("readyIn").textContent = "Boom done!"
+            document.getElementById("homeButton").style.display = "block";
             // alert("Time´s up!");
         } else {
             if (remaningSeconds === 0) {
@@ -52,8 +53,8 @@ document.getElementById("startButton").addEventListener("click", function () {
 
     document.getElementById("eggParent").classList.toggle("active");
 
-    timer(0, 1, callback);
-    // timer(minutes, seconds, callback); //Adjust time here
+    // timer(0, 10, callback);
+    timer(minutes, seconds, callback); //Adjust time here
 });
 
 document.getElementById("infoButton").addEventListener("click", function () {
