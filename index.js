@@ -49,8 +49,7 @@ document.getElementById("startButton").addEventListener("click", function () {
     document.getElementById("infoButton").style.display = "none";
     document.getElementById("questionContainer").style.display = "none";
 
-    // const timerName = document.getElementById("timer");
-    // timerName.setAttribute("id", "eggTimer");
+    document.getElementById("eggParent").classList.toggle("active");
 
     timer(minutes, seconds, callback); //Adjust time here
 });
@@ -150,13 +149,27 @@ document.querySelector("body").appendChild(div);
 div.setAttribute("id", "questionContainer");
 div.innerHTML =
     `
-<div id="title">Size?</div>
-<div class="buttonRow">
-<div class="size" id="sizeS">S</div><div class="size" id="sizeM">M</div><div  class="size" id="sizeL">L</div>
-</div>
+    <div id="title">Size?</div>
+    <div class="buttonRow">
+        <div class="size" id="sizeS">S</div>
+        <div class="size" id="sizeM">M</div>
+        <div class="size" id="sizeL">L</div>
+    </div>
 <div id="title">How do you want your eggs?</div>
-<div class="buttonRow">
-<div id="howDone">Soft</div><div id="howDone">Medium</div><div id="howDone">Hard</div>
+<div class="buttonRow-2">
+<div class="howDoneOption">
+    <div id="howDone">Soft</div>
+    <div class="softPic"></div>
+    </div>
+    <div class="howDoneOption">
+    <div id="howDone">Medium</div>
+    <div class="medPic"></div>
+    </div>
+    <div class="howDoneOption">
+    <div id="howDone">Hard</div>
+    <div class="hardPic"></div>
+    </div>
+</div>
 </div>
 `;
 
@@ -168,31 +181,24 @@ for (let i = 0; i < howDone.length; i++) {
 
 let eggSize = document.querySelectorAll("div.size");
 
-for (let i = 0; i < eggSize.length; i++) {
-    eggSize[i].addEventListener("click", decideEggSize);
-    eggSize[i].addEventListener("click", changeColor);
+function toggleButtonColor(event) {
+    if (event.target.classList.contains("selectedButton")) {
+        event.target.classList.remove("selectedButton");
+        event.target.style.backgroundColor = "#E1F2F4";
+        event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    } else {
 
-}
-
-function changeColor(event) {
-
-    console.log(event.originalTarget);
-    if(event.originalTarget.id === "sizeS") {
-        if(document.querySelector("div#sizeM").style.backgroundColor = "9ED0D6") {
-            document.querySelector("div#sizeM").style.backgroundColor = "#E1F2F4";
-        } else if(document.querySelector("div#sizeL").style.backgroundColor = "9ED0D6") {
-            document.querySelector("div#sizeL").style.backgroundColor = "#E1F2F4";
-        }
-        document.querySelector("div#sizeS").style.backgroundColor = "#9ED0D6";
-    } else if(event.originalTarget.id === "sizeM") {
-        if(document.querySelector("div#sizeS").style.backgroundColor = "9ED0D6") {
-            document.querySelector("div#sizeS").style.backgroundColor = "#E1F2F4";
-        } else if(document.querySelector("div#sizeL").style.backgroundColor = "9ED0D6") {
-            document.querySelector("div#sizeL").style.backgroundColor = "#E1F2F4";
-        }
-        document.querySelector("div#sizeM").style.backgroundColor = "#9ED0D6";
+        event.target.classList.add("selectedButton")
+        event.target.style.backgroundColor = "#9ED0D6";
+        event.target.style.boxShadow = "none";
     }
 }
+for (let i = 0; i < eggSize.length; i++) {
+    eggSize[i].addEventListener("click", decideEggSize);
+    eggSize[i].addEventListener("click", toggleButtonColor);
+
+}
+
 
 console.log(chosenOptions);
 function howBoiled(event) {
