@@ -18,13 +18,18 @@
     </header>
 
     <div id="content"></div>
-    <div id="timerPlaceholder"></div>
 
-    <div id="timer">
-        <span id="minutes">00</span>:<span id="seconds">00</span>
-        <br>
-        <button id="startButton">Start Timer</button>
+    <div id="timerParent">
+        <p id="readyIn" style="display: none;">Ready in...</p>
+        <div id="timer" style="display: none;">
+            <span id="minutes">00</span>
+            <span>:</span>
+            <span id="seconds">00</span>
+            <br>
+        </div>
     </div>
+    <button id="startButton">Start Timer</button>
+
     <script src="index2.js"></script>
 </body>
 

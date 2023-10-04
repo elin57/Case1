@@ -46,22 +46,41 @@ header {
     margin: 40% 20% 20% 20%;
 }
 
-#timer {
-    text-align: center;
+
+p {
+    font-size: 5vh;
+    margin-bottom: 30px;
 }
 
-.eggTimer {
+#timer {
     width: 176px;
     height: 75px;
     background-color: #E1F2F4;
     border-radius: 12px;
+    padding-top: 5vh;
+}
+
+#timerParent {
+    text-align: center;
+    width: 47vw;
+    position: absolute;
+    left: 28%;
+    top: 35%;
 }
 
 #minutes,
 #seconds {
-    font-size: 4vh;
+    margin: 0 5px;
+}
+
+span {
+    font-size: 5vh;
 }
 
 #startButton {
     margin-top: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 145px;
+    height: 35px;
 }

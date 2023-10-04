@@ -39,9 +39,12 @@ var callback = function () {
 
 document.getElementById("startButton").addEventListener("click", function () {
     document.getElementById("startButton").style.display = "none";
+    document.getElementById("timer").style.display = "block";
+    document.getElementById("readyIn").style.display = "block";
+    document.getElementById("infoButton").style.display = "none";
 
-    const timerName = document.getElementById("timer");
-    timerName.setAttribute("class", "eggTimer");
+    // const timerName = document.getElementById("timer");
+    // timerName.setAttribute("class", "eggTimer");
 
     timer(1, 30, callback); //Adjust time here
 });
