@@ -1,3 +1,4 @@
+"use strict";
 
 function updateTimerDisplay(minutes, seconds) {
     document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
