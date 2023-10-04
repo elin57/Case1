@@ -1,143 +1,72 @@
 "use strict";
 
-let months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-let daysInEachMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+"use strict";
 
 
-let x;
-let month;
-let year;
-let date;
-let hour;
-let minutes;
-let seconds;
-let addedSeconds = 0;
-let addedMinutes = 0;
-let countDownDate;
+function setEggTimer(incrementMinutes, incrementSeconds) {
+    let minutesInterval;
+    let secondsInterval;
 
+    console.log(document.querySelector("span#minutes").textContent);
+    let initialMinutes = parseInt(document.querySelector("span#minutes").textContent);
+    let initialSeconds = parseInt(document.querySelector("span#seconds").textContent);
 
-setEggTimer();
-
-function addSeconds(seconds) {
-    seconds = seconds + addedSeconds;
-    console.log(seconds);
-
-    if (seconds > 59) {
-        addedMinutes += 1;
-        let extraSeconds = seconds - 59;
-        seconds = extraSeconds;
-        console.log(extraSeconds);
-        console.log(seconds);
-    } else {
-        seconds = seconds + 1;
-    }
-    return seconds;
-}
-
-function addMinutes(minutes, hour) {
-    console.log(minutes);
-    for (let i = 0; i < addedMinutes; i++) {
-        minutes = minutes + 1;
-        if (minutes > 59) {
-            minutes = 0;
-            hour = hour + 1;
-            if (hour > 23) {
-                hour = 0;
-                date = date + 1
-                let daysInMonth = daysInEachMonth[new Date().getMonth()];
-                if (date > daysInMonth) {
-                    date = 1;
-                    if (month === "Dec") {
-                        month = "Jan";
-                    } else {
-                        month = months[new Date().getMonth() + 1];
-                        year = year + 1;
-                    }
+    if (incrementMinutes !== undefined) {
+        if (incrementMinutes !== 0) {
+            let totalMinutes = initialMinutes + incrementMinutes;
+            //let initialMinutes = totalMinutes - incrementMinutes;
+            //document.getElementById("timer").innerHTML = initialMinutes + "m " + addedSeconds + "s ";
+            let i = initialMinutes + 1;
+            minutesInterval = setInterval(function () {
+                document.querySelector("span#minutes").textContent = `0${i}`;
+                if (i === totalMinutes) {
+                    clearInterval(minutesInterval);
                 }
-            }
+                i++;
+
+            }, 100);
+        } else {
+            document.querySelector("span#minutes").textContent = `0${initialMinutes}`;
         }
     }
-    let values = {
-        minutes: minutes,
-        hour: hour
-    }
-    return values;
-}
 
-function setEggTimer(incrementMinutes) {
-    let interval;
-    if (incrementMinutes !== undefined) {
-        let stay = true;
-        let totalMinutes = addedMinutes + incrementMinutes;
-        let initialMinutes = totalMinutes - incrementMinutes;
-        //document.getElementById("timer").innerHTML = initialMinutes + "m " + addedSeconds + "s ";
-        console.log(addedMinutes);
-        console.log(totalMinutes);
-        let i = addedMinutes + 1;
-        interval = setInterval(function () {
-            document.getElementById("timer").innerHTML = i + "m " + addedSeconds + "s ";
-            if (i === totalMinutes) {
-                clearInterval(interval);
+    if (incrementSeconds !== undefined) {
+        let totalSeconds = initialSeconds + incrementSeconds;
+        let i = initialSeconds + 1;
+
+        secondsInterval = setInterval(function () {
+            if (JSON.stringify(i).length === 2) {
+                document.querySelector("span#seconds").textContent = `${i}`;
+            } else {
+                document.querySelector("span#seconds").textContent = `0${i}`;
+            }
+
+            if (i === totalSeconds) {
+                clearInterval(secondsInterval);
             }
             i++;
+        }, 70);
 
-        }, 300);
-
-        console.log(interval);
-        addedMinutes += incrementMinutes;
-    } else {
-        document.getElementById("timer").innerHTML = addedMinutes + "m " + addedSeconds + "s ";
     }
 }
 
-// Update the count down every 1 second
-let countDown = () => {
-    let now = new Date().getTime();
-
-    // Find the distance between now and the count down date
-    let distance = countDownDate - now;
-
-    minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
-
-    // If the count down is finished, write some text
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("timer").innerHTML = "EXPIRED";
-    }
-}
-
-document.getElementById("startTimer").addEventListener("click", function () {
-    month = months[new Date().getMonth()];
-    date = new Date().getDate();
-    year = new Date().getFullYear();
-    hour = new Date().getHours();
-    minutes = new Date().getMinutes();
-    seconds = new Date().getSeconds();
-
-    let values = addMinutes(minutes, hour);
-    minutes = values.minutes;
-    hour = values.hour;
-    seconds = addSeconds(seconds);
-    console.log(hour);
-
-    console.log(seconds);
-    console.log(minutes);
-    console.log(hour);
-    countDownDate = new Date(`${month} ${date}, ${year} ${hour}:${minutes}:${seconds}`).getTime();
-    countDown();
-    x = setInterval(countDown, 1000);
-
-});
+let chosenOptions = {
+    howDone: "",
+    size: "",
+    firstChosen: "",
+    previousSize: "",
+    previousHowDone: ""
+};
 
 let div = document.createElement("div");
 document.querySelector("body").appendChild(div);
 div.setAttribute("id", "questionContainer");
 div.innerHTML =
     `
+<div>Size?</div>
+<div id="size">S</div><div id="size">M</div><div id="size">L</div>
 <div>How do you want your eggs?</div>
-<div id=howDone>Soft</div><div id="howDone">Medium</div><div id="howDone">Hard</div>
+<div id="howDone">Soft</div><div id="howDone">Medium</div><div id="howDone">Hard</div>
 `;
 
 let howDone = document.querySelectorAll("div#howDone");
@@ -146,15 +75,620 @@ for (let i = 0; i < howDone.length; i++) {
     howDone[i].addEventListener("click", howBoiled);
 }
 
+let eggSize = document.querySelectorAll("div#size");
+
+for (let i = 0; i < eggSize.length; i++) {
+    eggSize[i].addEventListener("click", decideEggSize);
+}
+
+console.log(chosenOptions);
 function howBoiled(event) {
+    console.log(chosenOptions);
+
     let incrementMinutes;
-    if (event.originalTarget.textContent === "Soft") {
-        incrementMinutes = 2;
-    } else if (event.originalTarget.textContent === "Medium") {
-        incrementMinutes = 3;
-    } else {
-        incrementMinutes = 4;
+    if (chosenOptions.firstChosen === "") {
+        //Add default times for howDone. Same thing as howBoiled
+        chosenOptions.firstChosen = "howDone";
     }
 
-    setEggTimer(incrementMinutes);
+    if (chosenOptions.firstChosen === "howDone") {
+        if (chosenOptions.howDone === "") {
+            if (event.originalTarget.textContent === "Soft") {
+                incrementMinutes = 3;
+                chosenOptions.howDone = "Soft";
+            } else if (event.originalTarget.textContent === "Medium") {
+                incrementMinutes = 4;
+                chosenOptions.howDone = "Medium";
+            } else {
+                incrementMinutes = 8;
+                chosenOptions.howDone = "Hard";
+            }
+
+            setEggTimer(incrementMinutes);
+        } else if (chosenOptions.howDone === event.originalTarget.textContent) {
+            chosenOptions.previousHowDone = chosenOptions.howDone;
+            chosenOptions.howDone = "";
+            //chosenOptions.firstChosen = "";
+            let minutesToRemove;
+            if (event.originalTarget.textContent === "Soft") {
+                minutesToRemove = 3;
+            } else if (event.originalTarget.textContent === "Medium") {
+                minutesToRemove = 4;
+            } else {
+                minutesToRemove = 8;
+            }
+            removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
+        } else if (chosenOptions.howDone !== event.originalTarget.textContent) {
+            let previousIncrease;
+            let currentIncrease;
+            if (chosenOptions.howDone === "Soft") {
+                previousIncrease = 3;
+            } else if (chosenOptions.howDone === "Medium") {
+                previousIncrease = 4;
+            } else {
+                previousIncrease = 8;
+            }
+
+            chosenOptions.previousHowDone = chosenOptions.howDone;
+            if (event.originalTarget.textContent === "Soft") {
+                currentIncrease = 3;
+                chosenOptions.howDone = "Soft";
+            } else if (event.originalTarget.textContent === "Medium") {
+                currentIncrease = 4;
+                chosenOptions.howDone = "Medium";
+            } else {
+                currentIncrease = 8;
+                chosenOptions.howDone = "Hard";
+            }
+
+            adjustTheDifference(previousIncrease, currentIncrease);
+            //setEggTimer(incrementMinutes);
+            //Gör en annan funktion??
+        }
+    } else if (chosenOptions.firstChosen === "size") {
+        if (chosenOptions.howDone === "") {
+            if (chosenOptions.size === "S" && event.originalTarget.textContent === "Soft") {
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Soft";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Soft") {
+                let incrementSeconds = 40;
+                chosenOptions.howDone = "Soft";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Soft") {
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Soft";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Medium") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Medium";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Medium") {
+                incrementMinutes = 1;
+                let incrementSeconds = 40;
+                chosenOptions.howDone = "Medium";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Medium") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Medium";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Hard") {
+                incrementMinutes = 5;
+                chosenOptions.howDone = "Hard";
+                setEggTimer(incrementMinutes, undefined);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Hard") {
+                incrementMinutes = 5;
+                let incrementSeconds = 40;
+                chosenOptions.howDone = "Hard";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Hard") {
+                incrementMinutes = 5;
+                let incrementSeconds = 30;
+                chosenOptions.howDone = "Hard";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            }
+
+        } else if (chosenOptions.howDone === event.originalTarget.textContent) {
+            chosenOptions.howDone = "";
+            let minutesToRemove;
+            let secondsToRemove;
+            if (chosenOptions.size === "S" && event.originalTarget.textContent === "Soft") {
+                let secondsToRemove = 10;
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Soft") {
+                secondsToRemove = 40;
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Soft") {
+                secondsToRemove = 10;
+                console.log("hi");
+                console.log(chosenOptions);
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Medium") {
+                minutesToRemove = 1;
+                secondsToRemove = 10;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Medium") {
+                minutesToRemove = 1;
+                secondsToRemove = 40;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Medium") {
+                minutesToRemove = 1;
+                secondsToRemove = 10;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Hard") {
+                minutesToRemove = 5;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Hard") {
+                minutesToRemove = 5;
+                secondsToRemove = 40;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Hard") {
+                minutesToRemove = 5;
+                secondsToRemove = 30;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.size === "") {
+                chosenOptions.howDone = "";
+                let minutesToRemove;
+                let secondsToRemove;
+                if (chosenOptions.previousSize === "S" && event.originalTarget.textContent === "Soft") {
+                    let secondsToRemove = 10;
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+                } else if (chosenOptions.previousSize === "M" && event.originalTarget.textContent === "Soft") {
+                    secondsToRemove = 40;
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+                } else if (chosenOptions.previousSize === "L" && event.originalTarget.textContent === "Soft") {
+                    secondsToRemove = 10;
+                    console.log("hi");
+                    console.log(chosenOptions);
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+                } else if (chosenOptions.previousSize === "S" && event.originalTarget.textContent === "Medium") {
+                    minutesToRemove = 1;
+                    secondsToRemove = 10;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                } else if (chosenOptions.previousSize === "M" && event.originalTarget.textContent === "Medium") {
+                    minutesToRemove = 1;
+                    secondsToRemove = 40;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                } else if (chosenOptions.previousSize === "L" && event.originalTarget.textContent === "Medium") {
+                    minutesToRemove = 1;
+                    secondsToRemove = 10;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                } else if (chosenOptions.previousSize === "S" && event.originalTarget.textContent === "Hard") {
+                    minutesToRemove = 5;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
+                } else if (chosenOptions.previousSize === "M" && event.originalTarget.textContent === "Hard") {
+                    minutesToRemove = 5;
+                    secondsToRemove = 40;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                } else if (chosenOptions.previousSize === "L" && event.originalTarget.textContent === "Hard") {
+                    minutesToRemove = 5;
+                    secondsToRemove = 30;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                }
+            }
+        } else if (chosenOptions.howDone !== event.originalTarget.textContent) {
+            if (chosenOptions.size === "S" && event.originalTarget.textContent === "Soft") {
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Soft";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Soft") {
+                let incrementSeconds = 40;
+                chosenOptions.howDone = "Soft";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Soft") {
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Soft";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Medium") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Medium";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Medium") {
+                incrementMinutes = 1;
+                let incrementSeconds = 40;
+                chosenOptions.howDone = "Medium";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Medium") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.howDone = "Medium";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Hard") {
+                incrementMinutes = 5;
+                chosenOptions.howDone = "Hard";
+                setEggTimer(incrementMinutes, undefined);
+            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Hard") {
+                incrementMinutes = 5;
+                let incrementSeconds = 40;
+                chosenOptions.howDone = "Hard";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Hard") {
+                incrementMinutes = 5;
+                let incrementSeconds = 30;
+                chosenOptions.howDone = "Hard";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            }
+        }
+    }
+}
+
+function adjustTheDifference(previousMinutesIncrease, currentMinutesIncrease, previousSecondsIncrease, currentSecondsIncrease) {
+    let intervalForMinutes;
+    if (previousMinutesIncrease !== undefined) {
+        if (previousMinutesIncrease > currentMinutesIncrease) {
+            let difference = previousMinutesIncrease - currentMinutesIncrease;
+            let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
+
+            let i = activeMinutes - 1;
+            let counter = 0;
+            console.log(i);
+            intervalForMinutes = setInterval(function () {
+                document.querySelector("span#minutes").textContent = `0${i}`;
+                let minutes = document.querySelector("span#minutes").textContent;
+                let seconds = document.querySelector("span#seconds").textContent;
+
+                if (minutes === "00" && seconds === "00") {
+                    chosenOptions.firstChosen = "";
+                }
+
+                counter++;
+                if (counter === difference) {
+                    clearInterval(intervalForMinutes);
+                }
+                i--;
+
+            }, 70);
+        } else if (previousMinutesIncrease < currentMinutesIncrease) {
+            let difference = currentMinutesIncrease - previousMinutesIncrease;
+            let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
+            let i = activeMinutes + 1;
+            let counter = 0;
+            console.log(i);
+            intervalForMinutes = setInterval(function () {
+                document.querySelector("span#minutes").textContent = `0${i}`;
+                let minutes = document.querySelector("span#minutes").textContent;
+                let seconds = document.querySelector("span#seconds").textContent;
+
+                if (minutes === "00" && seconds === "00") {
+                    chosenOptions.firstChosen = "";
+                }
+
+                counter++;
+                if (counter === difference) {
+                    clearInterval(intervalForMinutes);
+                }
+                i++;
+
+            }, 70);
+        } else if (previousMinutesIncrease === currentMinutesIncrease) {
+            return;
+        }
+    }
+}
+
+function removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove) {
+    let intervalForMinutes;
+    let intervalForSeconds;
+    if (minutesToRemove !== undefined) {
+        let initialMinutes = parseInt(document.querySelector("span#minutes").textContent);
+        console.log(initialMinutes);
+        let i = initialMinutes - 1;
+        console.log(i);
+        let goalMinutes = initialMinutes - minutesToRemove;
+        console.log(goalMinutes);
+        intervalForMinutes = setInterval(function () {
+            document.querySelector("span#minutes").textContent = `0${i}`;
+            let minutes = document.querySelector("span#minutes").textContent;
+            let seconds = document.querySelector("span#seconds").textContent;
+
+            if (minutes === "00" && seconds === "00") {
+                chosenOptions.firstChosen = "";
+            }
+            if (i === goalMinutes) {
+                console.log("hi");
+                clearInterval(intervalForMinutes);
+            }
+            i--;
+
+        }, 100);
+    }
+
+    if (secondsToRemove !== undefined) {
+        let initialSeconds = parseInt(document.querySelector("span#seconds").textContent);
+        let i = initialSeconds - 1;
+
+        let goalSeconds = initialSeconds - secondsToRemove;
+        console.log(goalSeconds);
+        intervalForSeconds = setInterval(function () {
+            if (JSON.stringify(i).length === 2) {
+                document.querySelector("span#seconds").textContent = `${i}`;
+            } else {
+                document.querySelector("span#seconds").textContent = `0${i}`;
+            }
+            let minutes = document.querySelector("span#minutes").textContent;
+            let seconds = document.querySelector("span#seconds").textContent;
+
+            if (minutes === "00" && seconds === "00") {
+                chosenOptions.firstChosen = "";
+            }
+            if (i === goalSeconds) {
+                clearInterval(intervalForSeconds);
+            }
+            i--;
+
+        }, 70);
+    }
+
+
+
+}
+
+function decideEggSize(event) {
+    let incrementMinutes;
+    if (chosenOptions.firstChosen === "") {
+        //Add default times for size. 
+        chosenOptions.firstChosen = "size";
+    }
+
+    if (chosenOptions.firstChosen === "size") {
+        if (chosenOptions.size === "") {
+            if (event.originalTarget.textContent === "S") {
+                incrementMinutes = 3;
+                chosenOptions.size = "S";
+            } else if (event.originalTarget.textContent === "M") {
+                incrementMinutes = 3;
+                chosenOptions.size = "M";
+            } else {
+                incrementMinutes = 4;
+                chosenOptions.size = "L";
+            }
+
+            setEggTimer(incrementMinutes);
+        } else if (chosenOptions.size === event.originalTarget.textContent) {
+            chosenOptions.size = "";
+            //chosenOptions.firstChosen = "";
+            chosenOptions.previousSize = event.originalTarget.textContent;
+            let minutesToRemove;
+            if (event.originalTarget.textContent === "S") {
+                minutesToRemove = 3;
+            } else if (event.originalTarget.textContent === "M") {
+                minutesToRemove = 3;
+            } else {
+                minutesToRemove = 4;
+            }
+            removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
+        } else if (chosenOptions.size !== event.originalTarget.textContent) {
+            console.log(chosenOptions);
+            let previousIncrease;
+            let currentIncrease;
+            if (chosenOptions.size === "S") {
+                previousIncrease = 3;
+            } else if (chosenOptions.size === "M") {
+                previousIncrease = 3;
+            } else if (chosenOptions.size === "L") {
+                previousIncrease = 4;
+            }
+
+            chosenOptions.previousSize = chosenOptions.size;
+
+            if (event.originalTarget.textContent === "S") {
+                currentIncrease = 3;
+                chosenOptions.size = "S";
+            } else if (event.originalTarget.textContent === "M") {
+                currentIncrease = 3;
+                chosenOptions.size = "M";
+            } else {
+                currentIncrease = 4;
+                chosenOptions.size = "L";
+            }
+
+            adjustTheDifference(previousIncrease, currentIncrease);
+        }
+    } else if (chosenOptions.firstChosen === "howDone") {
+        if (chosenOptions.size === "") {
+            if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "S") {
+                let incrementSeconds = 10;
+                chosenOptions.size = "S";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "S") {
+                let incrementSeconds = 10;
+                chosenOptions.size = "S";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "S") {
+                let incrementMinutes = 0;
+                chosenOptions.size = "S";
+                setEggTimer(incrementMinutes, undefined);
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "M") {
+                let incrementSeconds = 40;
+                chosenOptions.size = "M";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "M") {
+                let incrementSeconds = 40;
+                chosenOptions.size = "M";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "M") {
+                let incrementSeconds = 40;
+                chosenOptions.size = "M";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "L") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.size = "L";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "L") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.size = "L";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "L") {
+                incrementMinutes = 1;
+                let incrementSeconds = 30;
+                chosenOptions.size = "L";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            }
+
+        } else if (chosenOptions.size === event.originalTarget.textContent) {
+            console.log(chosenOptions);
+            chosenOptions.previousSize = chosenOptions.size;
+            chosenOptions.size = "";
+            let minutesToRemove;
+            let secondsToRemove;
+            if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "S") {
+                secondsToRemove = 10;
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "S") {
+                secondsToRemove = 10;
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "S") {
+                return;
+
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "M") {
+                secondsToRemove = 40;
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "M") {
+                secondsToRemove = 40;
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "M") {
+                secondsToRemove = 40;
+                removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "L") {
+                minutesToRemove = 1;
+                secondsToRemove = 10;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "L") {
+                minutesToRemove = 1;
+                secondsToRemove = 10;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "L") {
+                minutesToRemove = 1;
+                secondsToRemove = 30;
+                removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+            } else if (chosenOptions.howDone === "") {
+                if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.textContent === "S") {
+                    secondsToRemove = 10;
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.textContent === "S") {
+                    secondsToRemove = 10;
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+
+                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.textContent === "S") {
+                    return;
+
+                } else if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.textContent === "M") {
+                    secondsToRemove = 40;
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.textContent === "M") {
+                    secondsToRemove = 40;
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.textContent === "M") {
+                    secondsToRemove = 40;
+                    removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
+                } else if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.textContent === "L") {
+                    minutesToRemove = 1;
+                    secondsToRemove = 10;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.textContent === "L") {
+                    minutesToRemove = 1;
+                    secondsToRemove = 10;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.textContent === "L") {
+                    minutesToRemove = 1;
+                    secondsToRemove = 30;
+                    removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
+                }
+            }
+        } else if (chosenOptions.size !== event.originalTarget.textContent) {
+
+            let previousIncreaseMinutes;
+            let previousIncreaseSeconds;
+            let currentIncreaseMinutes;
+            let currentIncreaseSeconds;
+            /* if(chosenOptions.size === "S") {
+                 previousIncrease = 3;
+             } else if(chosenOptions.size === "M") {
+                 previousIncrease = 3;
+             } else if(chosenOptions.size === "L") {
+                 previousIncrease = 4;
+             }
+ 
+             chosenOptions.previousSize = chosenOptions.size;
+ 
+             if(event.originalTarget.textContent === "S") {
+                 currentIncrease = 3;
+                 chosenOptions.size = "S";
+             } else if(event.originalTarget.textContent === "M") {
+                 currentIncrease = 3;
+                 chosenOptions.size = "M";
+             } else {
+                 currentIncrease = 4;
+                 chosenOptions.size = "L";
+             }
+ 
+             adjustTheDifference(previousIncrease, currentIncrease);*/
+
+            if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "S") {
+                if (chosenOptions.size === "M") {
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousSize = "M";
+                } else if (chosenOptions.size === "L") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "L";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 10;
+                chosenOptions.size = "S";
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "S") {
+                let incrementSeconds = 40;
+                chosenOptions.size = "S";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "S") {
+                let incrementSeconds = 10;
+                chosenOptions.size = "S";
+                setEggTimer(undefined, incrementSeconds);
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "M") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.size = "M";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "M") {
+                incrementMinutes = 1;
+                let incrementSeconds = 40;
+                chosenOptions.size = "M";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "M") {
+                incrementMinutes = 1;
+                let incrementSeconds = 10;
+                chosenOptions.size = "M";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "L") {
+                incrementMinutes = 5;
+                chosenOptions.size = "L";
+                setEggTimer(incrementMinutes, undefined);
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "L") {
+                incrementMinutes = 5;
+                let incrementSeconds = 40;
+                chosenOptions.size = "L";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "L") {
+                incrementMinutes = 5;
+                let incrementSeconds = 30;
+                chosenOptions.size = "L";
+                setEggTimer(incrementMinutes, incrementSeconds);
+            }
+            //Fixa denna ovan
+        }
+    }
+
 }
