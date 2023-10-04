@@ -18,6 +18,7 @@ function timer(minutes, seconds, cb) {
         if (remaningMinutes === 0 && remaningSeconds === 0) {
             clearInterval(intervalId);
             console.log("Times up");
+            document.getElementById("readyIn").textContent = "Boom done!"
             // alert("Time´s up!");
         } else {
             if (remaningSeconds === 0) {
@@ -51,7 +52,8 @@ document.getElementById("startButton").addEventListener("click", function () {
 
     document.getElementById("eggParent").classList.toggle("active");
 
-    timer(minutes, seconds, callback); //Adjust time here
+    timer(0, 1, callback);
+    // timer(minutes, seconds, callback); //Adjust time here
 });
 
 document.getElementById("infoButton").addEventListener("click", function () {
@@ -177,6 +179,21 @@ let howDone = document.querySelectorAll("div#howDone");
 
 for (let i = 0; i < howDone.length; i++) {
     howDone[i].addEventListener("click", howBoiled);
+    howDone[i].addEventListener("click", selectHowDone);
+}
+
+let isFontBold = false;
+
+function selectHowDone(event) {
+    const element = event.target;
+
+    if (isFontBold) {
+        element.style.fontWeight = "normal";
+    } else {
+        element.style.fontWeight = "bolder";
+    }
+
+    isFontBold = !isFontBold;
 }
 
 let eggSize = document.querySelectorAll("div.size");
