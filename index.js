@@ -47,9 +47,10 @@ document.getElementById("startButton").addEventListener("click", function () {
     document.getElementById("timer").style.display = "block";
     document.getElementById("readyIn").style.display = "block";
     document.getElementById("infoButton").style.display = "none";
+    document.getElementById("questionContainer").style.display = "none";
 
     // const timerName = document.getElementById("timer");
-    // timerName.setAttribute("class", "eggTimer");
+    // timerName.setAttribute("id", "eggTimer");
 
     timer(minutes, seconds, callback); //Adjust time here
 });
@@ -58,6 +59,7 @@ document.getElementById("infoButton").addEventListener("click", function () {
     document.getElementById("timer").style.display = "none";
     document.getElementById("startButton").style.display = "none";
     document.getElementById("infoButton").style.display = "none";
+    document.getElementById("questionContainer").style.display = "none";
 
 
     document.getElementById("content").innerHTML = `
@@ -82,7 +84,7 @@ document.getElementById("infoButton").addEventListener("click", function () {
         document.getElementById("timer").style.display = "block";
         document.getElementById("startButton").style.display = "block";
         document.getElementById("infoButton").style.display = "block";
-
+        document.getElementById("questionContainer").style.display = "block";
         document.getElementById("content").innerHTML = "";
     });
 })
@@ -148,10 +150,14 @@ document.querySelector("body").appendChild(div);
 div.setAttribute("id", "questionContainer");
 div.innerHTML =
     `
-<div>Size?</div>
-<div id="size">S</div><div id="size">M</div><div id="size">L</div>
-<div>How do you want your eggs?</div>
+<div id="title">Size?</div>
+<div class="buttonRow">
+<div class="size" id="sizeS">S</div><div class="size" id="sizeM">M</div><div  class="size" id="sizeL">L</div>
+</div>
+<div id="title">How do you want your eggs?</div>
+<div class="buttonRow">
 <div id="howDone">Soft</div><div id="howDone">Medium</div><div id="howDone">Hard</div>
+</div>
 `;
 
 let howDone = document.querySelectorAll("div#howDone");
@@ -160,10 +166,11 @@ for (let i = 0; i < howDone.length; i++) {
     howDone[i].addEventListener("click", howBoiled);
 }
 
-let eggSize = document.querySelectorAll("div#size");
+let eggSize = document.querySelectorAll("div.size");
 
 for (let i = 0; i < eggSize.length; i++) {
     eggSize[i].addEventListener("click", decideEggSize);
+
 }
 
 console.log(chosenOptions);

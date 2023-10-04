@@ -40,6 +40,7 @@ header {
     top: 10px;
     right: 40px;
     font-weight: bold;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 #content {
@@ -53,19 +54,27 @@ p {
 }
 
 #timer {
-    width: 176px;
-    height: 75px;
+    width: 140px;
+    height: 45px;
     background-color: #E1F2F4;
-    border-radius: 12px;
-    padding-top: 5vh;
+    border-radius: 10px;
+    padding-top: 2vh;
 }
 
 #timerParent {
     text-align: center;
     width: 47vw;
     position: absolute;
-    left: 28%;
-    top: 35%;
+    left: 30.6%;
+    top: 70%;
+}
+
+.eggTimer {
+    width: 176px;
+    height: 75px;
+    background-color: #E1F2F4;
+    border-radius: 10px;
+    padding-top: 5vh;
 }
 
 #minutes,
@@ -74,13 +83,48 @@ p {
 }
 
 span {
-    font-size: 5vh;
+    font-size: 4vh;
 }
 
 #startButton {
     margin-top: 10px;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     width: 145px;
     height: 35px;
+    position: absolute;
+    bottom: 10%;
+    left: 30%;
+    border: none;
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 50vw;
+    margin-left: 25%;
+}
+
+#size,
+#howDone {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.size {
+    background-color: #E1F2F4;
+    width: 45px;
+    height: 35px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+#selectedButton {
+    background-color: #9ED0D6;
+}
+
+#title {
+    text-align: center;
+    margin-top: 10vh;
 }
