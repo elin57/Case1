@@ -15,8 +15,8 @@ header {
 }
 
 .title {
-    font-size: 4vh;
-    margin-top: 8vh;
+    font-size: 5vh;
+    margin-top: 7vh;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -27,7 +27,7 @@ header {
     cursor: pointer;
     position: absolute;
     right: 37%;
-    bottom: 20vh;
+    bottom: 15vh;
     border: none;
     border-radius: 10px;
     width: 25vw;
@@ -46,6 +46,14 @@ header {
     right: 40px;
     font-weight: bold;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+ol {
+    line-height: 1.5;
 }
 
 #content {
@@ -79,6 +87,7 @@ p {
     top: 40%;
 }
 
+
 #minutes,
 #seconds {
     margin: 0 5px;
@@ -103,7 +112,7 @@ span {
 #homeButton {
     cursor: pointer;
     position: absolute;
-    right: 37%;
+    right: 32%;
     top: 40vh;
     border: none;
     border-radius: 10px;
@@ -127,6 +136,7 @@ span {
 .buttonRow-2 {
     width: 50vw;
     margin-left: 25%;
+    justify-content: space-between;
 }
 
 
@@ -149,8 +159,17 @@ span {
 
 #howDone {
     border-radius: 10px;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-bottom: 17px;
+    background-color: #E1F2F4;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    padding: 5px;
+    width: 45px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 
@@ -165,7 +184,7 @@ span {
 
 #title {
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 7vh;
 }
 
 .softPic {

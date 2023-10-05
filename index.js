@@ -18,9 +18,19 @@ function timer(minutes, seconds, cb) {
         if (remaningMinutes === 0 && remaningSeconds === 0) {
             clearInterval(intervalId);
             console.log("Times up");
-            document.getElementById("readyIn").textContent = "Boom done!"
+            document.getElementById("readyIn").textContent = "Boom done!";
             document.getElementById("homeButton").style.display = "block";
-            // alert("Time´s up!");
+            document.getElementById("homeButton").addEventListener("click", function () {
+                //restore
+                // document.getElementById("timer").style.display = "none";
+                document.getElementById("eggParent").classList.remove("active");
+                document.getElementById("startButton").style.display = "block";
+                document.getElementById("infoButton").style.display = "block";
+                document.getElementById("questionContainer").style.display = "block";
+                document.getElementById("readyIn").style.display = "none";
+                document.getElementById("homeButton").style.display = "none";
+                document.getElementById("content").innerHTML = "";
+            });
         } else {
             if (remaningSeconds === 0) {
                 remaningMinutes--;
@@ -41,6 +51,7 @@ var callback = function () {
 };
 
 document.getElementById("startButton").addEventListener("click", function () {
+    document.getElementById("readyIn").textContent = "Ready in...";
     let minutes = parseInt(document.querySelector("span#minutes").textContent);
     let seconds = parseInt(document.querySelector("span#seconds").textContent);
     timer(minutes, seconds, callback);
@@ -65,15 +76,15 @@ document.getElementById("infoButton").addEventListener("click", function () {
 
 
     document.getElementById("content").innerHTML = `
-    <h1>How to boil egg</h1>
+    <h1>How to boil an egg</h1>
 
     <ol>
-    <li>Check the size of your egg by looking at the bottom of the eggcarton</li>
+    <li>Check the size of your egg by looking at the bottom of the egg carton</li>
     <li>Select how you would like your egg</li>
     <li>Boil water in a medium sized pot</li>
-    <li>Put egg in water using a spoon as to not crack the egg/eggs</li>
+    <li>Lay egg in water using a spoon</li>
     <li>Start timer</li>
-    <li>A couple minutes later...</li>
+    <li>A couple of minutes later...</li>
     <li>Boom done!</li>
     </ol>
 
@@ -180,22 +191,23 @@ let howDone = document.querySelectorAll("div#howDone");
 
 for (let i = 0; i < howDone.length; i++) {
     howDone[i].addEventListener("click", howBoiled);
-    howDone[i].addEventListener("click", selectHowDone);
+    howDone[i].addEventListener("click", toggleButtonColor);
 }
 
 let isFontBold = false;
 
-function selectHowDone(event) {
-    const element = event.target;
+// function selectHowDone(event) {
+//     const element = event.target;
 
-    if (isFontBold) {
-        element.style.fontWeight = "normal";
-    } else {
-        element.style.fontWeight = "bolder";
-    }
+//     if (isFontBold) {
+//         element.style.fontWeight = "normal";
+//         element.style.backgroundColor=""
+//     } else {
+//         element.style.fontWeight = "bolder";
+//     }
 
-    isFontBold = !isFontBold;
-}
+//     isFontBold = !isFontBold;
+// }
 
 let eggSize = document.querySelectorAll("div.size");
 
