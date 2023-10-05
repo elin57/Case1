@@ -172,32 +172,89 @@ div.innerHTML =
 <div id="title">How do you want your eggs?</div>
 <div class="buttonRow-2">
 <div class="howDoneOption">
-    <div id="howDone">Soft</div>
-    <div class="softPic"></div>
+    <div id="howDoneTitle">Soft</div>
+    <div class="howDone" id="Soft"></div>
     </div>
     <div class="howDoneOption">
-    <div id="howDone">Medium</div>
-    <div class="medPic"></div>
+    <div id="howDoneTitle">Medium</div>
+    <div class="howDone" id="Medium"></div>
     </div>
     <div class="howDoneOption">
-    <div id="howDone">Hard</div>
-    <div class="hardPic"></div>
+    <div id="howDoneTitle">Hard</div>
+    <div class ="howDone" id="Hard"></div>
     </div>
 </div>
 </div>
 `;
 
-let howDone = document.querySelectorAll("div#howDone");
+let howDone = document.querySelectorAll("div.howDone");
 
 for (let i = 0; i < howDone.length; i++) {
     howDone[i].addEventListener("click", howBoiled);
-    howDone[i].addEventListener("click", toggleButtonColor);
+    howDone[i].addEventListener("click", toggleBoxShadow);
+}
+
+function toggleBoxShadow(event) {
+    if (event.target.classList.contains("selectedButton")) {
+        event.target.classList.remove("selectedButton");
+        event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    } else {
+        event.target.classList.add("selectedButton")
+        event.target.style.boxShadow = "none";
+    }
 }
 
 
 let eggSize = document.querySelectorAll("div.size");
 
 function toggleButtonColor(event) {
+    // if(event.target.id === "sizeS") {
+    //     console.log(document.querySelector("div#sizeS").classList);
+    //     if(document.querySelector("div#sizeM").classList.contains("selectedButton")) {
+    //         let list = document.querySelector("div#sizeM").classList;
+    //         console.log(list);
+    //         list.toggle("selectedButton");
+    //         event.target.style.backgroundColor = "#E1F2F4";
+    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    //     } else if(document.querySelector("div#sizeL").classList.contains("selectedButton")) {
+    //         document.querySelector("div#sizeL").classList.remove("selectedButton");
+    //         event.target.style.backgroundColor = "#E1F2F4";
+    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    //     }
+    //     event.target.classList.add("selectedButton")
+    //     event.target.style.backgroundColor = "#9ED0D6";
+    //     event.target.style.boxShadow = "none";
+    // } else if(event.target.id === "sizeM") {
+    //     if(document.querySelector("div#sizeS").classList.contains("selectedButton")) {
+    //         document.querySelector("div#sizeS").classList.remove("selectedButton");
+    //         event.target.style.backgroundColor = "#E1F2F4";
+    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    //     } else if(document.querySelector("div#sizeL").classList.contains("selectedButton")) {
+    //         document.querySelector("div#sizeL").classList.remove("selectedButton");
+    //         event.target.style.backgroundColor = "#E1F2F4";
+    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    //     }
+    //     event.target.classList.add("selectedButton")
+    //     event.target.style.backgroundColor = "#9ED0D6";
+    //     event.target.style.boxShadow = "none";
+    // } else if(event.target.id === "sizeL") {
+    //     if(document.querySelector("div#sizeS").classList.contains("selectedButton")) {
+    //         document.querySelector("div#sizeS").classList.remove("selectedButton");
+    //         event.target.style.backgroundColor = "#E1F2F4";
+    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    //     } else if(document.querySelector("div#sizeM").classList.contains("selectedButton")) {
+    //         document.querySelector("div#sizeM").classList.remove("selectedButton");
+    //         event.target.style.backgroundColor = "#E1F2F4";
+    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    //     }
+    //     event.target.classList.add("selectedButton")
+    //     event.target.style.backgroundColor = "#9ED0D6";
+    //     event.target.style.boxShadow = "none";
+    // }
+
+    // let allSize = document.querySelectorAll("size");
+    // allSize.forEach((button)=>button.classList.remove("selectedButton"));
+
     if (event.target.classList.contains("selectedButton")) {
         event.target.classList.remove("selectedButton");
         event.target.style.backgroundColor = "#E1F2F4";
@@ -228,7 +285,7 @@ function howBoiled(event) {
 
     if (chosenOptions.firstChosen === "howDone") {
         if (chosenOptions.howDone === "") {
-            if (event.originalTarget.textContent === "Soft") {
+            if (event.originalTarget.id === "Soft") {
                 incrementMinutes = 3;
                 chosenOptions.howDone = "Soft";
             } else if (event.originalTarget.textContent === "Medium") {
@@ -245,7 +302,7 @@ function howBoiled(event) {
             chosenOptions.howDone = "";
             //chosenOptions.firstChosen = "";
             let minutesToRemove;
-            if (event.originalTarget.textContent === "Soft") {
+            if (event.originalTarget.id === "Soft") {
                 minutesToRemove = 3;
             } else if (event.originalTarget.textContent === "Medium") {
                 minutesToRemove = 4;
@@ -265,7 +322,7 @@ function howBoiled(event) {
             }
 
             chosenOptions.previousHowDone = chosenOptions.howDone;
-            if (event.originalTarget.textContent === "Soft") {
+            if (event.originalTarget.id === "Soft") {
                 currentIncrease = 3;
                 chosenOptions.howDone = "Soft";
             } else if (event.originalTarget.textContent === "Medium") {
@@ -280,15 +337,15 @@ function howBoiled(event) {
         }
     } else if (chosenOptions.firstChosen === "size") {
         if (chosenOptions.howDone === "") {
-            if (chosenOptions.size === "S" && event.originalTarget.textContent === "Soft") {
+            if (chosenOptions.size === "S" && event.originalTarget.id === "Soft") {
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Soft") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Soft") {
                 let incrementSeconds = 40;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Soft") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Soft") {
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
@@ -327,15 +384,15 @@ function howBoiled(event) {
             chosenOptions.howDone = "";
             let minutesToRemove;
             let secondsToRemove;
-            if (chosenOptions.size === "S" && event.originalTarget.textContent === "Soft") {
+            if (chosenOptions.size === "S" && event.originalTarget.id === "Soft") {
                 let secondsToRemove = 10;
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Soft") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Soft") {
                 secondsToRemove = 40;
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Soft") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Soft") {
                 secondsToRemove = 10;
                 console.log("hi");
                 console.log(chosenOptions);
@@ -367,15 +424,15 @@ function howBoiled(event) {
                 chosenOptions.howDone = "";
                 let minutesToRemove;
                 let secondsToRemove;
-                if (chosenOptions.previousSize === "S" && event.originalTarget.textContent === "Soft") {
+                if (chosenOptions.previousSize === "S" && event.originalTarget.id === "Soft") {
                     let secondsToRemove = 10;
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-                } else if (chosenOptions.previousSize === "M" && event.originalTarget.textContent === "Soft") {
+                } else if (chosenOptions.previousSize === "M" && event.originalTarget.id === "Soft") {
                     secondsToRemove = 40;
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-                } else if (chosenOptions.previousSize === "L" && event.originalTarget.textContent === "Soft") {
+                } else if (chosenOptions.previousSize === "L" && event.originalTarget.id === "Soft") {
                     secondsToRemove = 10;
                     console.log("hi");
                     console.log(chosenOptions);
@@ -406,15 +463,15 @@ function howBoiled(event) {
                 }
             }
         } else if (chosenOptions.howDone !== event.originalTarget.textContent) {
-            if (chosenOptions.size === "S" && event.originalTarget.textContent === "Soft") {
+            if (chosenOptions.size === "S" && event.originalTarget.id === "Soft") {
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Soft") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Soft") {
                 let incrementSeconds = 40;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Soft") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Soft") {
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
