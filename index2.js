@@ -13,7 +13,6 @@ function timer(minutes, seconds, cb) {
 
     function update() {
         cb();
-        updateTimerDisplay(remaningMinutes, remaningSeconds);
 
         if (remaningMinutes === 0 && remaningSeconds === 0) {
             clearInterval(intervalId);
@@ -28,6 +27,8 @@ function timer(minutes, seconds, cb) {
             }
         }
 
+        updateTimerDisplay(remaningMinutes, remaningSeconds);
+
     }
 
     intervalId = setInterval(update, 1000);
@@ -39,6 +40,9 @@ var callback = function () {
 };
 
 document.getElementById("startButton").addEventListener("click", function () {
+    let minutes = parseInt(document.querySelector("span#minutes").textContent);
+    let seconds = parseInt(document.querySelector("span#seconds").textContent);
+    timer(minutes, seconds, callback); //Adjust the initial time here
     document.getElementById("startButton").style.display = "none";
     document.getElementById("timer").style.display = "block";
     document.getElementById("readyIn").style.display = "block";
