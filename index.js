@@ -227,8 +227,6 @@ function howBoiled(event) {
             }
         
             adjustTheDifference(previousIncrease, currentIncrease);
-           //setEggTimer(incrementMinutes);
-           //Gör en annan funktion??
         } 
     } else if(chosenOptions.firstChosen === "size") {
         if(chosenOptions.howDone === "") {
@@ -406,56 +404,154 @@ function howBoiled(event) {
 
 function adjustTheDifference(previousMinutesIncrease, currentMinutesIncrease, previousSecondsIncrease, currentSecondsIncrease) {
     let intervalForMinutes;
-    if(previousMinutesIncrease !== undefined) {
-        if(previousMinutesIncrease > currentMinutesIncrease) {
-            let difference = previousMinutesIncrease - currentMinutesIncrease;
-            let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
+    console.log(previousSecondsIncrease);
+    console.log(currentSecondsIncrease);
+    if(currentMinutesIncrease === 0) {
+        let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
+        let display = activeMinutes - previousMinutesIncrease;
+        document.querySelector("span#minutes").textContent = `0${display}`;
 
-            let i = activeMinutes - 1;
-            let counter = 0;
-            console.log(i);
-            intervalForMinutes = setInterval(function() {
-                document.querySelector("span#minutes").textContent = `0${i}`;
-                let minutes = document.querySelector("span#minutes").textContent;
-                let seconds = document.querySelector("span#seconds").textContent;
+    } else if(previousMinutesIncrease === 0) {
+        let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
+        let display = activeMinutes + currentMinutesIncrease;
+        document.querySelector("span#minutes").textContent = `0${display}`;
+        
+    } else if(previousMinutesIncrease > currentMinutesIncrease) {
+        let difference = previousMinutesIncrease - currentMinutesIncrease;
+        let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
 
-                if(minutes === "00" && seconds === "00") {
-                    chosenOptions.firstChosen = "";
-                }
+        let i = activeMinutes - 1;
+        let counter = 0;
+        console.log(i);
+        intervalForMinutes = setInterval(function() {
+            document.querySelector("span#minutes").textContent = `0${i}`;
+            let minutes = document.querySelector("span#minutes").textContent;
+            let seconds = document.querySelector("span#seconds").textContent;
 
-                counter++;
-                if(counter === difference) {
-                    clearInterval(intervalForMinutes);
-                }
-                i--;
-                
-            }, 70);
-        } else if(previousMinutesIncrease < currentMinutesIncrease) {
-            let difference = currentMinutesIncrease - previousMinutesIncrease;
-            let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
-            let i = activeMinutes + 1;
-            let counter = 0;
-            console.log(i);
-            intervalForMinutes = setInterval(function() {
-                document.querySelector("span#minutes").textContent = `0${i}`;
-                let minutes = document.querySelector("span#minutes").textContent;
-                let seconds = document.querySelector("span#seconds").textContent;
+            if(minutes === "00" && seconds === "00") {
+                chosenOptions.firstChosen = "";
+            }
 
-                if(minutes === "00" && seconds === "00") {
-                    chosenOptions.firstChosen = "";
-                }
+            counter++;
+            if(counter === difference) {
+                clearInterval(intervalForMinutes);
+            }
+            i--;
+            
+        }, 70);
+    } else if(previousMinutesIncrease < currentMinutesIncrease) {
 
-                counter++;
-                if(counter === difference) {
-                    clearInterval(intervalForMinutes);
-                }
-                i++;
-                
-            }, 70);
-        } else if(previousMinutesIncrease === currentMinutesIncrease) {
+        let difference = currentMinutesIncrease - previousMinutesIncrease;
+        let activeMinutes = parseInt(document.querySelector("span#minutes").textContent);
+        let i = activeMinutes + 1;
+        let counter = 0;
+        console.log(i);
+        intervalForMinutes = setInterval(function() {
+            document.querySelector("span#minutes").textContent = `0${i}`;
+            let minutes = document.querySelector("span#minutes").textContent;
+            let seconds = document.querySelector("span#seconds").textContent;
+
+            if(minutes === "00" && seconds === "00") {
+                chosenOptions.firstChosen = "";
+            }
+
+            counter++;
+            if(counter === difference) {
+                clearInterval(intervalForMinutes);
+            }
+            i++;
+            
+        }, 70);
+    }
+
+    let intervalForSeconds;
+    if(previousSecondsIncrease > currentSecondsIncrease) {
+        console.log("hi1");
+        if(currentSecondsIncrease === 0) {
+            let activeSeconds = parseInt(document.querySelector("span#seconds").textContent);
+            let display = activeSeconds - previousSecondsIncrease;
+
+            if(JSON.stringify(display).length === 2) {
+                document.querySelector("span#seconds").textContent = `${display}`;
+            } else {
+                document.querySelector("span#seconds").textContent = `0${display}`;
+            }
             return;
         }
-    }
+
+        let difference = previousSecondsIncrease - currentSecondsIncrease;
+        let activeSeconds = parseInt(document.querySelector("span#seconds").textContent);
+
+        let i = activeSeconds - 1;
+        let counter = 0;
+        console.log(i);
+        intervalForSeconds = setInterval(function() {
+            if(JSON.stringify(i).length === 2) {
+                document.querySelector("span#seconds").textContent = `${i}`;
+            } else {
+                document.querySelector("span#seconds").textContent = `0${i}`;
+            }
+            let minutes = document.querySelector("span#minutes").textContent;
+            let seconds = document.querySelector("span#seconds").textContent;
+
+            if(minutes === "00" && seconds === "00") {
+                chosenOptions.firstChosen = "";
+            }
+
+            counter++;
+            if(counter === difference) {
+                clearInterval(intervalForSeconds);
+            }
+            i--;
+            
+        }, 70);
+
+    } else if(previousSecondsIncrease < currentSecondsIncrease) {
+        
+        console.log("hi2");
+
+        if(previousSecondsIncrease === 0) {
+            let activeSeconds = parseInt(document.querySelector("span#seconds").textContent);
+            let display = activeSeconds + currentSecondsIncrease;
+            if(JSON.stringify(display).length === 2) {
+                document.querySelector("span#seconds").textContent = `${display}`;
+            } else {
+                document.querySelector("span#seconds").textContent = `0${display}`;
+            }
+            return;
+        }
+
+        let difference = currentSecondsIncrease - previousSecondsIncrease;
+        let activeSeconds = parseInt(document.querySelector("span#seconds").textContent);
+        let i = activeSeconds + 1;
+        let counter = 0;
+        console.log(i);
+        intervalForSeconds = setInterval(function() {
+            if(i > 59) {
+                let activeMinutes = document.querySelector("span#minutes").textContent;
+                document.querySelector("span#minutes").textContent = `0${activeMinutes+1}`;
+                i = 0;
+            }
+            if(JSON.stringify(i).length === 2) {
+                document.querySelector("span#seconds").textContent = `${i}`;
+            } else {
+                document.querySelector("span#seconds").textContent = `0${i}`;
+            }
+            let minutes = document.querySelector("span#minutes").textContent;
+            let seconds = document.querySelector("span#seconds").textContent;
+
+            if(minutes === "00" && seconds === "00") {
+                chosenOptions.firstChosen = "";
+            }
+
+            counter++;
+            if(counter === difference) {
+                clearInterval(intervalForSeconds);
+            }
+            i++;
+            
+        }, 70);
+    } 
 }
 
 function removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove) {
@@ -698,31 +794,10 @@ function decideEggSize(event) {
             let previousIncreaseSeconds;
             let currentIncreaseMinutes;
             let currentIncreaseSeconds;
-           /* if(chosenOptions.size === "S") {
-                previousIncrease = 3;
-            } else if(chosenOptions.size === "M") {
-                previousIncrease = 3;
-            } else if(chosenOptions.size === "L") {
-                previousIncrease = 4;
-            }
-
-            chosenOptions.previousSize = chosenOptions.size;
-
-            if(event.originalTarget.textContent === "S") {
-                currentIncrease = 3;
-                chosenOptions.size = "S";
-            } else if(event.originalTarget.textContent === "M") {
-                currentIncrease = 3;
-                chosenOptions.size = "M";
-            } else {
-                currentIncrease = 4;
-                chosenOptions.size = "L";
-            }
-
-            adjustTheDifference(previousIncrease, currentIncrease);*/
 
             if(chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "S") {
                 if(chosenOptions.size === "M") {
+                    previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 40;
                     chosenOptions.previousSize = "M";
                 } else if(chosenOptions.size === "L") {
@@ -735,44 +810,118 @@ function decideEggSize(event) {
                 chosenOptions.size = "S";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if(chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "S") {
-                let incrementSeconds = 40;
+                if(chosenOptions.size === "M") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousSize = "M";
+                } else if(chosenOptions.size === "L") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "L";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 10;
                 chosenOptions.size = "S";
-                setEggTimer(undefined, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if(chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "S") {
-                let incrementSeconds = 10;
+                if(chosenOptions.size === "M") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousSize = "M";
+                } else if(chosenOptions.size === "L") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 30;
+                    chosenOptions.previousSize = "L";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 0;
                 chosenOptions.size = "S";
-                setEggTimer(undefined, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if(chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "M") {
-                incrementMinutes = 1;
-                let incrementSeconds = 10;
+                if(chosenOptions.size === "S") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "S";
+                } else if(chosenOptions.size === "L") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "L";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 40;
                 chosenOptions.size = "M";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if(chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "M") {
-                incrementMinutes = 1;
-                let incrementSeconds = 40;
+                if(chosenOptions.size === "S") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "S";
+                } else if(chosenOptions.size === "L") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "L";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 40;
                 chosenOptions.size = "M";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if(chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "M") {
-                incrementMinutes = 1;
-                let incrementSeconds = 10;
+                if(chosenOptions.size === "S") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 0;
+                    chosenOptions.previousSize = "S";
+                } else if(chosenOptions.size === "L") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 30;
+                    chosenOptions.previousSize = "L";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 40;
                 chosenOptions.size = "M";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if(chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "L") {
-                incrementMinutes = 5;
+                if(chosenOptions.size === "S") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "S";
+                } else if(chosenOptions.size === "M") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousSize = "M";
+                }
+                currentIncreaseMinutes = 1;
+                currentIncreaseSeconds = 10;
                 chosenOptions.size = "L";
-                setEggTimer(incrementMinutes, undefined);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             }  else if(chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "L") {
-                incrementMinutes = 5;
-                let incrementSeconds = 40;
+                if(chosenOptions.size === "S") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousSize = "S";
+                } else if(chosenOptions.size === "M") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousSize = "M";
+                }
+                currentIncreaseMinutes = 1;
+                currentIncreaseSeconds = 10;
                 chosenOptions.size = "L";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             }   else if(chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "L") {
-                incrementMinutes = 5;
-                let incrementSeconds = 30;
-                chosenOptions.size = "L";
-                setEggTimer(incrementMinutes, incrementSeconds);
-            }
-            //Fixa denna ovan
+                 if(chosenOptions.size === "S") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 0;
+                    chosenOptions.previousSize = "S";
+                 } else if(chosenOptions.size === "M") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousSize = "M";
+                 }
+                 currentIncreaseMinutes = 1;
+                 currentIncreaseSeconds = 30;
+                 chosenOptions.size = "L";
+                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
+           }
         }
     }
 
