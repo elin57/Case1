@@ -16,6 +16,7 @@ header {
 
 .title {
     font-size: 5vh;
+    font-weight: bold;
     margin-top: 7vh;
     position: absolute;
     left: 50%;
@@ -98,13 +99,12 @@ span {
 }
 
 #startButton {
-    margin-top: 10px;
     border-radius: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     width: 145px;
     height: 35px;
     position: absolute;
-    bottom: 10%;
+    bottom: 12%;
     left: 30%;
     border: none;
 }
@@ -131,12 +131,14 @@ span {
 
 .buttonRow {
     margin-left: 25%;
+    margin-bottom: 15%;
 }
 
 .buttonRow-2 {
-    width: 50vw;
+    width: 55vw;
     margin-left: 25%;
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 
@@ -159,9 +161,10 @@ span {
 
 #howDoneTitle {
     border-radius: 10px;
-    margin-bottom: 17px;
+    margin-top: 10px;
     text-align: center;
     padding: 5px;
+    padding-right: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,6 +184,7 @@ span {
 #title {
     text-align: center;
     margin-top: 7vh;
+    font-weight: bold;
 }
 
 .howDone {
@@ -189,6 +193,7 @@ span {
     height: 35px;
     border-radius: 10px;
     margin-top: 10px;
+    background-position: center;
 }
 
 #Soft {
@@ -196,7 +201,7 @@ span {
 }
 
 #Medium {
-    background-image: url(Images/Component\ 22.png);  
+    background-image: url(Images/Component\ 22.png);
 }
 
 #Hard {

@@ -163,25 +163,25 @@ document.querySelector("body").appendChild(div);
 div.setAttribute("id", "questionContainer");
 div.innerHTML =
     `
-    <div id="title">Size?</div>
+    <div id="title">Size</div>
     <div class="buttonRow">
         <div class="size" id="sizeS">S</div>
         <div class="size" id="sizeM">M</div>
         <div class="size" id="sizeL">L</div>
     </div>
-<div id="title">How do you want your eggs?</div>
+<div id="title">How do you want your eggs</div>
 <div class="buttonRow-2">
 <div class="howDoneOption">
-    <div id="howDoneTitle">Soft</div>
     <div class="howDone" id="Soft"></div>
+    <div id="howDoneTitle">Soft</div>
     </div>
     <div class="howDoneOption">
-    <div id="howDoneTitle">Medium</div>
     <div class="howDone" id="Medium"></div>
+    <div id="howDoneTitle">Medium</div>
     </div>
     <div class="howDoneOption">
-    <div id="howDoneTitle">Hard</div>
     <div class ="howDone" id="Hard"></div>
+    <div id="howDoneTitle">Hard</div>
     </div>
 </div>
 </div>
@@ -288,7 +288,7 @@ function howBoiled(event) {
             if (event.originalTarget.id === "Soft") {
                 incrementMinutes = 3;
                 chosenOptions.howDone = "Soft";
-            } else if (event.originalTarget.textContent === "Medium") {
+            } else if (event.originalTarget.id === "Medium") {
                 incrementMinutes = 4;
                 chosenOptions.howDone = "Medium";
             } else {
@@ -297,20 +297,20 @@ function howBoiled(event) {
             }
 
             setEggTimer(incrementMinutes);
-        } else if (chosenOptions.howDone === event.originalTarget.textContent) {
+        } else if (chosenOptions.howDone === event.originalTarget.id) {
             chosenOptions.previousHowDone = chosenOptions.howDone;
             chosenOptions.howDone = "";
             //chosenOptions.firstChosen = "";
             let minutesToRemove;
             if (event.originalTarget.id === "Soft") {
                 minutesToRemove = 3;
-            } else if (event.originalTarget.textContent === "Medium") {
+            } else if (event.originalTarget.id === "Medium") {
                 minutesToRemove = 4;
             } else {
                 minutesToRemove = 8;
             }
             removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
-        } else if (chosenOptions.howDone !== event.originalTarget.textContent) {
+        } else if (chosenOptions.howDone !== event.originalTarget.id) {
             let previousIncrease;
             let currentIncrease;
             if (chosenOptions.howDone === "Soft") {
@@ -325,7 +325,7 @@ function howBoiled(event) {
             if (event.originalTarget.id === "Soft") {
                 currentIncrease = 3;
                 chosenOptions.howDone = "Soft";
-            } else if (event.originalTarget.textContent === "Medium") {
+            } else if (event.originalTarget.id === "Medium") {
                 currentIncrease = 4;
                 chosenOptions.howDone = "Medium";
             } else {
@@ -349,31 +349,31 @@ function howBoiled(event) {
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "S" && event.originalTarget.id === "Medium") {
                 incrementMinutes = 1;
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Medium";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Medium") {
                 incrementMinutes = 1;
                 let incrementSeconds = 40;
                 chosenOptions.howDone = "Medium";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Medium") {
                 incrementMinutes = 1;
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Medium";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "S" && event.originalTarget.id === "Hard") {
                 incrementMinutes = 5;
                 chosenOptions.howDone = "Hard";
                 setEggTimer(incrementMinutes, undefined);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Hard") {
                 incrementMinutes = 5;
                 let incrementSeconds = 40;
                 chosenOptions.howDone = "Hard";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Hard") {
                 incrementMinutes = 5;
                 let incrementSeconds = 30;
                 chosenOptions.howDone = "Hard";
@@ -397,26 +397,26 @@ function howBoiled(event) {
                 console.log("hi");
                 console.log(chosenOptions);
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "S" && event.originalTarget.id === "Medium") {
                 minutesToRemove = 1;
                 secondsToRemove = 10;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Medium") {
                 minutesToRemove = 1;
                 secondsToRemove = 40;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Medium") {
                 minutesToRemove = 1;
                 secondsToRemove = 10;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "S" && event.originalTarget.id === "Hard") {
                 minutesToRemove = 5;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Hard") {
                 minutesToRemove = 5;
                 secondsToRemove = 40;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Hard") {
                 minutesToRemove = 5;
                 secondsToRemove = 30;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
@@ -437,32 +437,32 @@ function howBoiled(event) {
                     console.log("hi");
                     console.log(chosenOptions);
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-                } else if (chosenOptions.previousSize === "S" && event.originalTarget.textContent === "Medium") {
+                } else if (chosenOptions.previousSize === "S" && event.originalTarget.id === "Medium") {
                     minutesToRemove = 1;
                     secondsToRemove = 10;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-                } else if (chosenOptions.previousSize === "M" && event.originalTarget.textContent === "Medium") {
+                } else if (chosenOptions.previousSize === "M" && event.originalTarget.id === "Medium") {
                     minutesToRemove = 1;
                     secondsToRemove = 40;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-                } else if (chosenOptions.previousSize === "L" && event.originalTarget.textContent === "Medium") {
+                } else if (chosenOptions.previousSize === "L" && event.originalTarget.id === "Medium") {
                     minutesToRemove = 1;
                     secondsToRemove = 10;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-                } else if (chosenOptions.previousSize === "S" && event.originalTarget.textContent === "Hard") {
+                } else if (chosenOptions.previousSize === "S" && event.originalTarget.id === "Hard") {
                     minutesToRemove = 5;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
-                } else if (chosenOptions.previousSize === "M" && event.originalTarget.textContent === "Hard") {
+                } else if (chosenOptions.previousSize === "M" && event.originalTarget.id === "Hard") {
                     minutesToRemove = 5;
                     secondsToRemove = 40;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-                } else if (chosenOptions.previousSize === "L" && event.originalTarget.textContent === "Hard") {
+                } else if (chosenOptions.previousSize === "L" && event.originalTarget.id === "Hard") {
                     minutesToRemove = 5;
                     secondsToRemove = 30;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
                 }
             }
-        } else if (chosenOptions.howDone !== event.originalTarget.textContent) {
+        } else if (chosenOptions.howDone !== event.originalTarget.id) {
             if (chosenOptions.size === "S" && event.originalTarget.id === "Soft") {
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Soft";
@@ -475,31 +475,31 @@ function howBoiled(event) {
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Soft";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "S" && event.originalTarget.id === "Medium") {
                 incrementMinutes = 1;
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Medium";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Medium") {
                 incrementMinutes = 1;
                 let incrementSeconds = 40;
                 chosenOptions.howDone = "Medium";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Medium") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Medium") {
                 incrementMinutes = 1;
                 let incrementSeconds = 10;
                 chosenOptions.howDone = "Medium";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "S" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "S" && event.originalTarget.id === "Hard") {
                 incrementMinutes = 5;
                 chosenOptions.howDone = "Hard";
                 setEggTimer(incrementMinutes, undefined);
-            } else if (chosenOptions.size === "M" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "M" && event.originalTarget.id === "Hard") {
                 incrementMinutes = 5;
                 let incrementSeconds = 40;
                 chosenOptions.howDone = "Hard";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.size === "L" && event.originalTarget.textContent === "Hard") {
+            } else if (chosenOptions.size === "L" && event.originalTarget.id === "Hard") {
                 incrementMinutes = 5;
                 let incrementSeconds = 30;
                 chosenOptions.howDone = "Hard";
@@ -781,128 +781,128 @@ function decideEggSize(event) {
         }
     } else if (chosenOptions.firstChosen === "howDone") {
         if (chosenOptions.size === "") {
-            if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "S") {
+            if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "S") {
                 let incrementSeconds = 10;
                 chosenOptions.size = "S";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "S") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "S") {
                 let incrementSeconds = 10;
                 chosenOptions.size = "S";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "S") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "S") {
                 let incrementMinutes = 0;
                 chosenOptions.size = "S";
                 setEggTimer(incrementMinutes, undefined);
-            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "M") {
                 let incrementSeconds = 40;
                 chosenOptions.size = "M";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "M") {
                 let incrementSeconds = 40;
                 chosenOptions.size = "M";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "M") {
                 let incrementSeconds = 40;
                 chosenOptions.size = "M";
                 setEggTimer(undefined, incrementSeconds);
-            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "L") {
                 incrementMinutes = 1;
                 let incrementSeconds = 10;
                 chosenOptions.size = "L";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "L") {
                 incrementMinutes = 1;
                 let incrementSeconds = 10;
                 chosenOptions.size = "L";
                 setEggTimer(incrementMinutes, incrementSeconds);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "L") {
                 incrementMinutes = 1;
                 let incrementSeconds = 30;
                 chosenOptions.size = "L";
                 setEggTimer(incrementMinutes, incrementSeconds);
             }
 
-        } else if (chosenOptions.size === event.originalTarget.textContent) {
+        } else if (chosenOptions.size === event.originalTarget.id) {
             console.log(chosenOptions);
             chosenOptions.previousSize = chosenOptions.size;
             chosenOptions.size = "";
             let minutesToRemove;
             let secondsToRemove;
-            if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "S") {
+            if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "S") {
                 secondsToRemove = 10;
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "S") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "S") {
                 secondsToRemove = 10;
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "S") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "S") {
                 return;
 
-            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "M") {
                 secondsToRemove = 40;
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "M") {
                 secondsToRemove = 40;
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "M") {
                 secondsToRemove = 40;
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "L") {
                 minutesToRemove = 1;
                 secondsToRemove = 10;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "L") {
                 minutesToRemove = 1;
                 secondsToRemove = 10;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "L") {
                 minutesToRemove = 1;
                 secondsToRemove = 30;
                 removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
             } else if (chosenOptions.howDone === "") {
-                if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.textContent === "S") {
+                if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.id === "S") {
                     secondsToRemove = 10;
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.textContent === "S") {
+                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.id === "S") {
                     secondsToRemove = 10;
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
-                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.textContent === "S") {
+                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.id === "S") {
                     return;
 
-                } else if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.textContent === "M") {
+                } else if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.id === "M") {
                     secondsToRemove = 40;
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.textContent === "M") {
+                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.id === "M") {
                     secondsToRemove = 40;
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.textContent === "M") {
+                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.id === "M") {
                     secondsToRemove = 40;
                     removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
-                } else if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.textContent === "L") {
+                } else if (chosenOptions.previousHowDone === "Soft" && event.originalTarget.id === "L") {
                     minutesToRemove = 1;
                     secondsToRemove = 10;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.textContent === "L") {
+                } else if (chosenOptions.previousHowDone === "Medium" && event.originalTarget.id === "L") {
                     minutesToRemove = 1;
                     secondsToRemove = 10;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
-                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.textContent === "L") {
+                } else if (chosenOptions.previousHowDone === "Hard" && event.originalTarget.id === "L") {
                     minutesToRemove = 1;
                     secondsToRemove = 30;
                     removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove);
                 }
             }
-        } else if (chosenOptions.size !== event.originalTarget.textContent) {
+        } else if (chosenOptions.size !== event.originalTarget.id) {
 
             let previousIncreaseMinutes;
             let previousIncreaseSeconds;
             let currentIncreaseMinutes;
             let currentIncreaseSeconds;
 
-            if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "S") {
+            if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "S") {
                 if (chosenOptions.size === "M") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 40;
@@ -916,7 +916,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 10;
                 chosenOptions.size = "S";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "S") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "S") {
                 if (chosenOptions.size === "M") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 40;
@@ -930,7 +930,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 10;
                 chosenOptions.size = "S";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "S") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "S") {
                 if (chosenOptions.size === "M") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 40;
@@ -944,7 +944,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 0;
                 chosenOptions.size = "S";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "M") {
                 if (chosenOptions.size === "S") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 10;
@@ -958,7 +958,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 40;
                 chosenOptions.size = "M";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "M") {
                 if (chosenOptions.size === "S") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 10;
@@ -972,7 +972,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 40;
                 chosenOptions.size = "M";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "M") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "M") {
                 if (chosenOptions.size === "S") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 0;
@@ -986,7 +986,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 40;
                 chosenOptions.size = "M";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "L") {
                 if (chosenOptions.size === "S") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 10;
@@ -1000,7 +1000,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 10;
                 chosenOptions.size = "L";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Medium" && event.originalTarget.id === "L") {
                 if (chosenOptions.size === "S") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 10;
@@ -1014,7 +1014,7 @@ function decideEggSize(event) {
                 currentIncreaseSeconds = 10;
                 chosenOptions.size = "L";
                 adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
-            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.textContent === "L") {
+            } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "L") {
                 if (chosenOptions.size === "S") {
                     previousIncreaseMinutes = 0;
                     previousIncreaseSeconds = 0;
