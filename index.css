@@ -157,15 +157,11 @@ span {
     align-items: center;
 }
 
-#howDone {
+#howDoneTitle {
     border-radius: 10px;
     margin-bottom: 17px;
-    background-color: #E1F2F4;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     text-align: center;
     padding: 5px;
-    width: 45px;
-    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,28 +183,22 @@ span {
     margin-top: 7vh;
 }
 
-.softPic {
+.howDone {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 45px;
+    height: 35px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#Soft {
     background-image: url(Images/Component\ 21.png);
-    width: 45px;
-    height: 35px;
-    border-radius: 10px;
-    margin-top: 10px;
 }
 
-.medPic {
-    background-image: url(Images/Component\ 22.png);
-    width: 45px;
-    height: 35px;
-    border-radius: 10px;
-    margin-top: 10px;
-    margin-left: 5px;
+#Medium {
+    background-image: url(Images/Component\ 22.png);  
 }
 
-.hardPic {
+#Hard {
     background-image: url(Images/Component\ 20.png);
-    width: 45px;
-    height: 35px;
-    border-radius: 10px;
-    margin-top: 10px;
-    margin-left: 10px;
 }
