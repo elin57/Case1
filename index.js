@@ -8,9 +8,9 @@ function updateTimerDisplay(minutes, seconds) {
 
 
 function timer(minutes, seconds, cb) {
-    var remaningMinutes = minutes;
-    var remaningSeconds = seconds;
-    var intervalId
+    let remaningMinutes = minutes;
+    let remaningSeconds = seconds;
+    let intervalId
 
     function update() {
         cb();
@@ -46,7 +46,7 @@ function timer(minutes, seconds, cb) {
 
 }
 
-var callback = function () {
+let callback = function () {
     console.log('callback');
 };
 
@@ -165,9 +165,9 @@ div.innerHTML =
     `
     <div id="title">Size</div>
     <div class="buttonRow">
-        <div class="size" id="sizeS">S</div>
-        <div class="size" id="sizeM">M</div>
-        <div class="size" id="sizeL">L</div>
+        <div class="size" id="S">S</div>
+        <div class="size" id="M">M</div>
+        <div class="size" id="L">L</div>
     </div>
 <div id="title">How do you want your eggs</div>
 <div class="buttonRow-2">
@@ -195,67 +195,87 @@ for (let i = 0; i < howDone.length; i++) {
 }
 
 function toggleBoxShadow(event) {
-    if (event.target.classList.contains("selectedButton")) {
-        event.target.classList.remove("selectedButton");
-        event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
-    } else {
-        event.target.classList.add("selectedButton")
-        event.target.style.boxShadow = "none";
-    }
+    howDone.forEach(button=> {
+        button.classList.remove("selectedButton");
+        button.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+
+    });
+    event.target.classList.add("selectedButton")
+    event.target.style.boxShadow = "none";
 }
 
 
 let eggSize = document.querySelectorAll("div.size");
 
 function toggleButtonColor(event) {
-    // if(event.target.id === "sizeS") {
-    //     console.log(document.querySelector("div#sizeS").classList);
-    //     if(document.querySelector("div#sizeM").classList.contains("selectedButton")) {
-    //         let list = document.querySelector("div#sizeM").classList;
-    //         console.log(list);
-    //         list.toggle("selectedButton");
-    //         event.target.style.backgroundColor = "#E1F2F4";
-    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
-    //     } else if(document.querySelector("div#sizeL").classList.contains("selectedButton")) {
-    //         document.querySelector("div#sizeL").classList.remove("selectedButton");
-    //         event.target.style.backgroundColor = "#E1F2F4";
-    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
-    //     }
-    //     event.target.classList.add("selectedButton")
-    //     event.target.style.backgroundColor = "#9ED0D6";
-    //     event.target.style.boxShadow = "none";
-    // } else if(event.target.id === "sizeM") {
-    //     if(document.querySelector("div#sizeS").classList.contains("selectedButton")) {
-    //         document.querySelector("div#sizeS").classList.remove("selectedButton");
-    //         event.target.style.backgroundColor = "#E1F2F4";
-    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
-    //     } else if(document.querySelector("div#sizeL").classList.contains("selectedButton")) {
-    //         document.querySelector("div#sizeL").classList.remove("selectedButton");
-    //         event.target.style.backgroundColor = "#E1F2F4";
-    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
-    //     }
-    //     event.target.classList.add("selectedButton")
-    //     event.target.style.backgroundColor = "#9ED0D6";
-    //     event.target.style.boxShadow = "none";
-    // } else if(event.target.id === "sizeL") {
-    //     if(document.querySelector("div#sizeS").classList.contains("selectedButton")) {
-    //         document.querySelector("div#sizeS").classList.remove("selectedButton");
-    //         event.target.style.backgroundColor = "#E1F2F4";
-    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
-    //     } else if(document.querySelector("div#sizeM").classList.contains("selectedButton")) {
-    //         document.querySelector("div#sizeM").classList.remove("selectedButton");
-    //         event.target.style.backgroundColor = "#E1F2F4";
-    //         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
-    //     }
-    //     event.target.classList.add("selectedButton")
-    //     event.target.style.backgroundColor = "#9ED0D6";
-    //     event.target.style.boxShadow = "none";
-    // }
+     if(event.target.id === "S") {
+         if(document.querySelector("div#M").classList.contains("selectedButton")) {
+            document.querySelector("div#M").classList.remove("selectedButton");
+            document.querySelector("div#M").style.backgroundColor = "#E1F2F4";
+            document.querySelector("div#M").style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+        } else if(document.querySelector("div#L").classList.contains("selectedButton")) {
+            document.querySelector("div#L").classList.remove("selectedButton");
+            document.querySelector("div#L").style.backgroundColor = "#E1F2F4";
+            document.querySelector("div#L").style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+        } 
+
+       if(event.target.classList.contains("selectedButton")) {
+            event.target.classList.remove("selectedButton");
+            event.target.style.backgroundColor = "#E1F2F4";
+            event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+        } else {
+            event.target.classList.add("selectedButton")
+            event.target.style.backgroundColor = "#9ED0D6";
+            event.target.style.boxShadow = "none";
+        }
+        
+     } else if(event.target.id === "M") {
+       if(document.querySelector("div#S").classList.contains("selectedButton")) {
+           document.querySelector("div#S").classList.remove("selectedButton");
+           document.querySelector("div#S").style.backgroundColor = "#E1F2F4";
+           document.querySelector("div#S").style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+        } else if(document.querySelector("div#L").classList.contains("selectedButton")) {
+            document.querySelector("div#L").classList.remove("selectedButton");
+            document.querySelector("div#L").style.backgroundColor = "#E1F2F4";
+            document.querySelector("div#L").style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+         }
+
+         if(event.target.classList.contains("selectedButton")) {
+            event.target.classList.remove("selectedButton");
+            event.target.style.backgroundColor = "#E1F2F4";
+            event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+         } else {
+            event.target.classList.add("selectedButton")
+            event.target.style.backgroundColor = "#9ED0D6";
+            event.target.style.boxShadow = "none";
+         }
+   
+     } else if(event.target.id === "L") {
+         if(document.querySelector("div#S").classList.contains("selectedButton")) {
+            document.querySelector("div#S").classList.remove("selectedButton");
+            document.querySelector("div#S").style.backgroundColor = "#E1F2F4";
+            document.querySelector("div#S").style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+         } else if(document.querySelector("div#M").classList.contains("selectedButton")) {
+            document.querySelector("div#M").classList.remove("selectedButton");
+            document.querySelector("div#M").style.backgroundColor = "#E1F2F4";
+            document.querySelector("div#M").style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+         } 
+         
+         if(event.target.classList.contains("selectedButton")) {
+            event.target.classList.remove("selectedButton");
+            event.target.style.backgroundColor = "#E1F2F4";
+            event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+         } else {
+            event.target.classList.add("selectedButton")
+            event.target.style.backgroundColor = "#9ED0D6";
+            event.target.style.boxShadow = "none";
+         }
+     }
 
     // let allSize = document.querySelectorAll("size");
     // allSize.forEach((button)=>button.classList.remove("selectedButton"));
-
-    if (event.target.classList.contains("selectedButton")) {
+    /*if (event.target.classList.contains("selectedButton")) {
+        console.log(document.querySelector("div#S").classList.remove("selectedButton"));
         event.target.classList.remove("selectedButton");
         event.target.style.backgroundColor = "#E1F2F4";
         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
@@ -264,7 +284,7 @@ function toggleButtonColor(event) {
         event.target.classList.add("selectedButton")
         event.target.style.backgroundColor = "#9ED0D6";
         event.target.style.boxShadow = "none";
-    }
+    }*/
 }
 for (let i = 0; i < eggSize.length; i++) {
     eggSize[i].addEventListener("click", decideEggSize);
@@ -274,6 +294,7 @@ for (let i = 0; i < eggSize.length; i++) {
 
 
 console.log(chosenOptions);
+
 function howBoiled(event) {
     console.log(chosenOptions);
 
@@ -310,7 +331,7 @@ function howBoiled(event) {
                 minutesToRemove = 8;
             }
             removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
-        } else if (chosenOptions.howDone !== event.originalTarget.id) {
+        } else if (chosenOptions.howDone !== event.originalTarget.id && chosenOptions.size === "") {
             let previousIncrease;
             let currentIncrease;
             if (chosenOptions.howDone === "Soft") {
@@ -334,6 +355,8 @@ function howBoiled(event) {
             }
 
             adjustTheDifference(previousIncrease, currentIncrease);
+        } else if(chosenOptions.howDone !== event.originalTarget.id && chosenOptions.size !== "") {
+            //Hade behövt skriva fler if-satser här. Och i den andra funktionen för size
         }
     } else if (chosenOptions.firstChosen === "size") {
         if (chosenOptions.howDone === "") {
@@ -380,7 +403,7 @@ function howBoiled(event) {
                 setEggTimer(incrementMinutes, incrementSeconds);
             }
 
-        } else if (chosenOptions.howDone === event.originalTarget.textContent) {
+        } else if (chosenOptions.howDone === event.originalTarget.id) {
             chosenOptions.howDone = "";
             let minutesToRemove;
             let secondsToRemove;
@@ -463,47 +486,135 @@ function howBoiled(event) {
                 }
             }
         } else if (chosenOptions.howDone !== event.originalTarget.id) {
+            let previousIncreaseMinutes;
+            let previousIncreaseSeconds;
+            let currentIncreaseMinutes;
+            let currentIncreaseSeconds;
             if (chosenOptions.size === "S" && event.originalTarget.id === "Soft") {
-                let incrementSeconds = 10;
+                if(chosenOptions.howDone === "Medium") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousHowDone = "Medium";
+                } else if(chosenOptions.howDone === "Hard") {
+                    previousIncreaseMinutes = 5;
+                    previousIncreaseSeconds = 0;
+                    chosenOptions.previousHowDone = "Hard";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 10;
                 chosenOptions.howDone = "Soft";
-                setEggTimer(undefined, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "M" && event.originalTarget.id === "Soft") {
-                let incrementSeconds = 40;
+                if(chosenOptions.howDone === "Medium") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousSize = "Medium";
+                } else if(chosenOptions.howDone === "Hard") {
+                    previousIncreaseMinutes = 5;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousHowDone = "Hard";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 40;
                 chosenOptions.howDone = "Soft";
-                setEggTimer(undefined, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "L" && event.originalTarget.id === "Soft") {
-                let incrementSeconds = 10;
+                if(chosenOptions.howDone === "Medium") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousHowDone = "Medium";
+                } else if(chosenOptions.howDone === "Hard") {
+                    previousIncreaseMinutes = 5;
+                    previousIncreaseSeconds = 30;
+                    chosenOptions.previousHowDone = "Hard";
+                }
+                currentIncreaseMinutes = 0;
+                currentIncreaseSeconds = 10;
                 chosenOptions.howDone = "Soft";
-                setEggTimer(undefined, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "S" && event.originalTarget.id === "Medium") {
-                incrementMinutes = 1;
-                let incrementSeconds = 10;
+                if(chosenOptions.howDone === "Soft") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousHowDone = "Soft";
+                } else if(chosenOptions.howDone === "Hard") {
+                    previousIncreaseMinutes = 5;
+                    previousIncreaseSeconds = 0;
+                    chosenOptions.previousHowDone = "Hard";
+                }
+                currentIncreaseMinutes = 1;
+                currentIncreaseSeconds = 10;
                 chosenOptions.howDone = "Medium";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "M" && event.originalTarget.id === "Medium") {
-                incrementMinutes = 1;
-                let incrementSeconds = 40;
+                if(chosenOptions.howDone === "Soft") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousHowDone = "Soft";
+                } else if(chosenOptions.howDone === "Hard") {
+                    previousIncreaseMinutes = 5;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousHowDone = "Hard";
+                }
+                currentIncreaseMinutes = 1;
+                currentIncreaseSeconds = 40;
                 chosenOptions.howDone = "Medium";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "L" && event.originalTarget.id === "Medium") {
-                incrementMinutes = 1;
-                let incrementSeconds = 10;
+                if(chosenOptions.howDone === "Soft") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousHowDone = "Soft";
+                } else if(chosenOptions.howDone === "Hard") {
+                    previousIncreaseMinutes = 5;
+                    previousIncreaseSeconds = 30;
+                    chosenOptions.previousHowDone = "Hard";
+                }
+                currentIncreaseMinutes = 1;
+                currentIncreaseSeconds = 10;
                 chosenOptions.howDone = "Medium";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "S" && event.originalTarget.id === "Hard") {
-                incrementMinutes = 5;
+                if(chosenOptions.howDone === "Soft") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousHowDone = "Soft";
+                } else if(chosenOptions.howDone === "Medium") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousHowDone = "Medium";
+                }
+                currentIncreaseMinutes = 5;
+                currentIncreaseSeconds = 0;
                 chosenOptions.howDone = "Hard";
-                setEggTimer(incrementMinutes, undefined);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "M" && event.originalTarget.id === "Hard") {
-                incrementMinutes = 5;
-                let incrementSeconds = 40;
+                if(chosenOptions.howDone === "Soft") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousHowDone = "Soft";
+                } else if(chosenOptions.howDone === "Medium") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 40;
+                    chosenOptions.previousHowDone = "Medium";
+                }
+                currentIncreaseMinutes = 5;
+                currentIncreaseSeconds = 40;
                 chosenOptions.howDone = "Hard";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             } else if (chosenOptions.size === "L" && event.originalTarget.id === "Hard") {
-                incrementMinutes = 5;
-                let incrementSeconds = 30;
+                if(chosenOptions.howDone === "Soft") {
+                    previousIncreaseMinutes = 0;
+                    previousIncreaseSeconds = 10;
+                    chosenOptions.previousHowDone = "Soft";
+                } else if(chosenOptions.howDone === "Medium") {
+                    previousIncreaseMinutes = 1;
+                    previousIncreaseSeconds = 10;
+                }
+                currentIncreaseMinutes = 5;
+                currentIncreaseSeconds = 30;
                 chosenOptions.howDone = "Hard";
-                setEggTimer(incrementMinutes, incrementSeconds);
+                adjustTheDifference(previousIncreaseMinutes, currentIncreaseMinutes, previousIncreaseSeconds, currentIncreaseSeconds);
             }
         }
     }
@@ -727,10 +838,10 @@ function decideEggSize(event) {
 
     if (chosenOptions.firstChosen === "size") {
         if (chosenOptions.size === "") {
-            if (event.originalTarget.textContent === "S") {
+            if (event.originalTarget.id === "S") {
                 incrementMinutes = 3;
                 chosenOptions.size = "S";
-            } else if (event.originalTarget.textContent === "M") {
+            } else if (event.originalTarget.id === "M") {
                 incrementMinutes = 3;
                 chosenOptions.size = "M";
             } else {
@@ -739,24 +850,25 @@ function decideEggSize(event) {
             }
 
             setEggTimer(incrementMinutes);
-        } else if (chosenOptions.size === event.originalTarget.textContent) {
+        } else if (chosenOptions.size === event.originalTarget.id) {
             chosenOptions.size = "";
             //chosenOptions.firstChosen = "";
-            chosenOptions.previousSize = event.originalTarget.textContent;
+            chosenOptions.previousSize = event.originalTarget.id;
             let minutesToRemove;
-            if (event.originalTarget.textContent === "S") {
+            if (event.originalTarget.id === "S") {
                 minutesToRemove = 3;
-            } else if (event.originalTarget.textContent === "M") {
+            } else if (event.originalTarget.id === "M") {
                 minutesToRemove = 3;
             } else {
                 minutesToRemove = 4;
             }
             removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
-        } else if (chosenOptions.size !== event.originalTarget.textContent) {
+        } else if (chosenOptions.size !== event.originalTarget.id) {
             console.log(chosenOptions);
             let previousIncrease;
             let currentIncrease;
             if (chosenOptions.size === "S") {
+                console.log("hi");
                 previousIncrease = 3;
             } else if (chosenOptions.size === "M") {
                 previousIncrease = 3;
@@ -766,10 +878,11 @@ function decideEggSize(event) {
 
             chosenOptions.previousSize = chosenOptions.size;
 
-            if (event.originalTarget.textContent === "S") {
+            if (event.originalTarget.id === "S") {
                 currentIncrease = 3;
                 chosenOptions.size = "S";
-            } else if (event.originalTarget.textContent === "M") {
+            } else if (event.originalTarget.id === "M") {
+                console.log("panda");
                 currentIncrease = 3;
                 chosenOptions.size = "M";
             } else {
@@ -777,9 +890,13 @@ function decideEggSize(event) {
                 chosenOptions.size = "L";
             }
 
+            console.log(previousIncrease);
+            console.log(currentIncrease);
             adjustTheDifference(previousIncrease, currentIncrease);
         }
+
     } else if (chosenOptions.firstChosen === "howDone") {
+
         if (chosenOptions.size === "") {
             if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "S") {
                 let incrementSeconds = 10;
@@ -1031,5 +1148,4 @@ function decideEggSize(event) {
             }
         }
     }
-
 }
