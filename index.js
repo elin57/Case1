@@ -200,8 +200,16 @@ function toggleBoxShadow(event) {
         button.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
 
     });
-    event.target.classList.add("selectedButton")
-    event.target.style.boxShadow = "none";
+    
+    if(event.target.classList.contains("selectedButton")) {
+        event.target.classList.remove("selectedButton");
+        event.target.style.backgroundColor = "#E1F2F4";
+        event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    } else {
+        event.target.classList.add("selectedButton")
+        event.target.style.backgroundColor = "#9ED0D6";
+        event.target.style.boxShadow = "none";
+    }
 }
 
 
@@ -293,12 +301,27 @@ for (let i = 0; i < eggSize.length; i++) {
 }
 
 
-console.log(chosenOptions);
 
 function howBoiled(event) {
     console.log(chosenOptions);
 
     let incrementMinutes;
+
+    if(chosenOptions.howDone !== "" && chosenOptions.size !== "" && event.target.id !== chosenOptions.howDone) {
+        chosenOptions.firstChosen = "";
+        chosenOptions.size = "";
+        chosenOptions.howDone = "";
+        document.querySelector("span#minutes").textContent = `00`;
+        document.querySelector("span#seconds").textContent = `00`; 
+        eggSize.forEach(button => {
+            button.classList.remove("selectedButton");
+            button.style.backgroundColor = "#E1F2F4";
+            button.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+        });
+    } else if(chosenOptions.howDone === "" && chosenOptions.size === "") {
+        chosenOptions.firstChosen = "";
+    }
+
     if (chosenOptions.firstChosen === "") {
         //Add default times for howDone. Same thing as howBoiled
         chosenOptions.firstChosen = "howDone";
@@ -329,6 +352,8 @@ function howBoiled(event) {
                 minutesToRemove = 4;
             } else {
                 minutesToRemove = 8;
+                console.log(chosenOptions);
+
             }
             removeTimeFromHowBoiledAndSize(minutesToRemove, undefined);
         } else if (chosenOptions.howDone !== event.originalTarget.id && chosenOptions.size === "") {
@@ -355,9 +380,7 @@ function howBoiled(event) {
             }
 
             adjustTheDifference(previousIncrease, currentIncrease);
-        } else if(chosenOptions.howDone !== event.originalTarget.id && chosenOptions.size !== "") {
-            //Hade behövt skriva fler if-satser här. Och i den andra funktionen för size
-        }
+        } 
     } else if (chosenOptions.firstChosen === "size") {
         if (chosenOptions.howDone === "") {
             if (chosenOptions.size === "S" && event.originalTarget.id === "Soft") {
@@ -618,6 +641,8 @@ function howBoiled(event) {
             }
         }
     }
+    console.log(chosenOptions);
+
 }
 
 function adjustTheDifference(previousMinutesIncrease, currentMinutesIncrease, previousSecondsIncrease, currentSecondsIncrease) {
@@ -646,9 +671,9 @@ function adjustTheDifference(previousMinutesIncrease, currentMinutesIncrease, pr
             let minutes = document.querySelector("span#minutes").textContent;
             let seconds = document.querySelector("span#seconds").textContent;
 
-            if (minutes === "00" && seconds === "00") {
+           /* if (minutes === "00" && seconds === "00") {
                 chosenOptions.firstChosen = "";
-            }
+            }*/
 
             counter++;
             if (counter === difference) {
@@ -669,9 +694,9 @@ function adjustTheDifference(previousMinutesIncrease, currentMinutesIncrease, pr
             let minutes = document.querySelector("span#minutes").textContent;
             let seconds = document.querySelector("span#seconds").textContent;
 
-            if (minutes === "00" && seconds === "00") {
+           /* if (minutes === "00" && seconds === "00") {
                 chosenOptions.firstChosen = "";
-            }
+            }*/
 
             counter++;
             if (counter === difference) {
@@ -712,9 +737,9 @@ function adjustTheDifference(previousMinutesIncrease, currentMinutesIncrease, pr
             let minutes = document.querySelector("span#minutes").textContent;
             let seconds = document.querySelector("span#seconds").textContent;
 
-            if (minutes === "00" && seconds === "00") {
+            /*if (minutes === "00" && seconds === "00") {
                 chosenOptions.firstChosen = "";
-            }
+            }*/
 
             counter++;
             if (counter === difference) {
@@ -758,9 +783,9 @@ function adjustTheDifference(previousMinutesIncrease, currentMinutesIncrease, pr
             let minutes = document.querySelector("span#minutes").textContent;
             let seconds = document.querySelector("span#seconds").textContent;
 
-            if (minutes === "00" && seconds === "00") {
+           /* if (minutes === "00" && seconds === "00") {
                 chosenOptions.firstChosen = "";
-            }
+            }*/
 
             counter++;
             if (counter === difference) {
@@ -787,9 +812,9 @@ function removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove) {
             let minutes = document.querySelector("span#minutes").textContent;
             let seconds = document.querySelector("span#seconds").textContent;
 
-            if (minutes === "00" && seconds === "00") {
+           /* if (minutes === "00" && seconds === "00") {
                 chosenOptions.firstChosen = "";
-            }
+            }*/
             if (i === goalMinutes) {
                 console.log("hi");
                 clearInterval(intervalForMinutes);
@@ -814,9 +839,9 @@ function removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove) {
             let minutes = document.querySelector("span#minutes").textContent;
             let seconds = document.querySelector("span#seconds").textContent;
 
-            if (minutes === "00" && seconds === "00") {
+           /* if (minutes === "00" && seconds === "00") {
                 chosenOptions.firstChosen = "";
-            }
+            }*/
             if (i === goalSeconds) {
                 clearInterval(intervalForSeconds);
             }
@@ -830,13 +855,34 @@ function removeTimeFromHowBoiledAndSize(minutesToRemove, secondsToRemove) {
 }
 
 function decideEggSize(event) {
+    console.log(chosenOptions);
+    console.log(event.originalTarget.id);
+    if(chosenOptions.howDone !== "" && chosenOptions.size !==  "" && chosenOptions.size !== event.target.id) {
+        console.log("hi");
+        chosenOptions.firstChosen = "";
+        chosenOptions.size = "";
+        chosenOptions.howDone = "";
+        document.querySelector("span#minutes").textContent = `00`;
+        document.querySelector("span#seconds").textContent = `00`;
+
+        howDone.forEach(button=> {
+            button.classList.remove("selectedButton");
+            button.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
+    
+        });
+    } else if(chosenOptions.howDone === "" && chosenOptions.size === "") {
+        chosenOptions.firstChosen = "";
+    }
+
     let incrementMinutes;
     if (chosenOptions.firstChosen === "") {
+        console.log("panda?");
         //Add default times for size. 
         chosenOptions.firstChosen = "size";
     }
 
     if (chosenOptions.firstChosen === "size") {
+        console.log("what are you doing in here???");
         if (chosenOptions.size === "") {
             if (event.originalTarget.id === "S") {
                 incrementMinutes = 3;
@@ -896,7 +942,7 @@ function decideEggSize(event) {
         }
 
     } else if (chosenOptions.firstChosen === "howDone") {
-
+        console.log("hiii");
         if (chosenOptions.size === "") {
             if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "S") {
                 let incrementSeconds = 10;
@@ -954,6 +1000,8 @@ function decideEggSize(event) {
                 removeTimeFromHowBoiledAndSize(undefined, secondsToRemove);
 
             } else if (chosenOptions.howDone === "Hard" && event.originalTarget.id === "S") {
+                console.log("hiii2");
+
                 return;
 
             } else if (chosenOptions.howDone === "Soft" && event.originalTarget.id === "M") {
@@ -1148,4 +1196,6 @@ function decideEggSize(event) {
             }
         }
     }
+    console.log(chosenOptions);
+
 }
