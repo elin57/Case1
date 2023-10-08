@@ -218,7 +218,7 @@ for (let i = 0; i < howDone.length; i++) {
 function toggleBoxShadow(event) {
 
     for(let i = 0; i < howDone.length; i++) {
-        if(howDone[i].classList.contains("selectedButton")) {
+        if(event.target.id === howDone[i].getAttribute("id")) {
             continue;
         }
         howDone[i].classList.remove("selectedButton");
@@ -227,11 +227,9 @@ function toggleBoxShadow(event) {
 
     if(event.target.classList.contains("selectedButton")) {
         event.target.classList.remove("selectedButton");
-        event.target.style.backgroundColor = "#E1F2F4";
         event.target.style.boxShadow = "0px 4px 4px rgba(0, 0, 0, 0.25)";
     } else {
         event.target.classList.add("selectedButton")
-        event.target.style.backgroundColor = "#9ED0D6";
         event.target.style.boxShadow = "none";
     }
 
@@ -240,7 +238,6 @@ function toggleBoxShadow(event) {
     }
     for (let i = 0; i < eggSize.length; i++) {
         eggSize[i].style.pointerEvents = "none";
-    
     }
 }
 
